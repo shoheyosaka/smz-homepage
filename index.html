@@ -1,0 +1,1250 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>しみずWeb制作所｜お店や個人のお仕事に、ちょうどいいWeb制作</title>
+    <meta
+      name="description"
+      content="ホームページ・LP制作、チラシや名刺などのデザイン制作、業務効率化ツールの開発まで。小さなご相談から対応する、しみずWeb制作所です。"
+    />
+    <link rel="icon" href="/shimizu-logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-brand: #439ce4;
+        --font-sans: "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+        --font-brand: "Zen Maru Gothic", "Noto Sans JP", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 4.5rem;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      /* ヒーローの段階表示 */
+      @keyframes hero-in {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .hero-reveal {
+        animation: hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .hero-reveal-1 {
+        animation-delay: 0.05s;
+      }
+      .hero-reveal-2 {
+        animation-delay: 0.15s;
+      }
+      .hero-reveal-3 {
+        animation-delay: 0.25s;
+      }
+      .hero-reveal-4 {
+        animation-delay: 0.35s;
+      }
+      .hero-reveal-5 {
+        animation-delay: 0.45s;
+      }
+
+      /* ヒーローのモックアップがふわっと浮く */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .float-main {
+        animation: float 7s ease-in-out infinite;
+      }
+      .float-card {
+        animation: float 6s ease-in-out 0.8s infinite;
+      }
+      .float-system {
+        animation: float 6.5s ease-in-out 1.6s infinite;
+      }
+
+      @keyframes bar-grow {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: scaleY(1);
+        }
+      }
+      .dashboard-bar {
+        transform-origin: bottom;
+        animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      /* ボタンの光沢 */
+      .cta-shine {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .cta-shine::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+        transform: translateX(-120%);
+        animation: shine 4s ease-in-out 1.5s infinite;
+      }
+      @keyframes shine {
+        0%,
+        60% {
+          transform: translateX(-120%);
+        }
+        100% {
+          transform: translateX(120%);
+        }
+      }
+
+      /* スクロール時のフェードイン */
+      .motion-ready [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .motion-ready [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-reveal,
+        .float-main,
+        .float-card,
+        .float-system,
+        .dashboard-bar,
+        .cta-shine::after {
+          animation: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-white font-sans antialiased">
+    <div class="min-h-screen bg-white text-zinc-950">
+      <header class="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/90 backdrop-blur-lg">
+        <div class="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 lg:px-8">
+          <a href="#top" class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <img src="/shimizu-logo.jpeg" alt="" class="h-full w-auto max-w-none" />
+            </span>
+            <span class="font-brand text-[15px] font-medium tracking-[0.04em]">しみずWeb制作所</span>
+          </a>
+          <nav class="hidden items-center gap-7 text-xs font-medium text-zinc-600 md:flex">
+            <a class="transition hover:text-brand" href="#services">サービス</a>
+            <a class="transition hover:text-brand" href="#works">制作サンプル</a>
+            <a class="transition hover:text-brand" href="#price">料金</a>
+            <a class="transition hover:text-brand" href="#about">私たちについて</a>
+          </nav>
+          <a
+            href="#contact"
+            class="group flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-brand/85"
+          >
+            相談する
+            <svg
+              aria-hidden="true"
+              class="size-4 transition group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14m-5-5 5 5-5 5"></path>
+            </svg>
+          </a>
+        </div>
+      </header>
+      <main id="top">
+        <section class="relative overflow-hidden border-b border-zinc-200">
+          <div
+            class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] bg-[size:64px_64px] opacity-35"
+          ></div>
+          <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-14">
+            <div>
+              <div
+                class="hero-reveal hero-reveal-1 mb-7 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm"
+              >
+                <span class="size-1.5 rounded-full bg-brand"></span>
+                小さな困りごとを解決するサービス
+              </div>
+              <h1
+                class="hero-reveal hero-reveal-2 max-w-3xl text-[clamp(1.65rem,7.5vw,3.75rem)] leading-[1.1] font-semibold tracking-[-0.055em] text-zinc-950 lg:text-6xl"
+              >
+                <span class="block whitespace-nowrap">お店や個人のお仕事に、</span>
+                <span class="block whitespace-nowrap text-brand">ちょうどいいWeb制作。</span>
+              </h1>
+              <p class="hero-reveal hero-reveal-3 mt-7 max-w-xl text-base leading-8 text-zinc-600 sm:text-lg">
+                シンプルなホームページや名刺、チラシなど。
+                <br class="hidden sm:block" />
+                必要なものを、必要な分だけ。
+              </p>
+              <div class="hero-reveal hero-reveal-4 mt-9 flex flex-wrap gap-3">
+                <a
+                  href="#services"
+                  class="cta-shine group flex items-center gap-3 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/85"
+                >
+                  サービスを見る
+                  <svg
+                    aria-hidden="true"
+                    class="size-4 transition group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14m-5-5 5 5-5 5"></path>
+                  </svg>
+                </a>
+                <a
+                  href="#contact"
+                  class="flex items-center gap-3 rounded-full border border-zinc-300 bg-white px-6 py-3.5 text-sm font-semibold transition hover:border-zinc-500"
+                >
+                  まずは気軽に相談する
+                </a>
+              </div>
+              <div class="hero-reveal hero-reveal-5 mt-10 grid max-w-2xl gap-2 sm:grid-cols-3">
+                <div class="rounded-xl border border-zinc-200 bg-white/80 p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-[9px] text-zinc-400">01</span>
+                    <span class="text-xs font-semibold text-zinc-800">Web制作</span>
+                  </div>
+                  <p class="mt-2 text-[10px] leading-5 text-zinc-500">ホームページ / LP制作</p>
+                </div>
+                <div class="rounded-xl border border-zinc-200 bg-white/80 p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-[9px] text-zinc-400">02</span>
+                    <span class="text-xs font-semibold text-zinc-800">印刷物・デザイン</span>
+                  </div>
+                  <p class="mt-2 text-[10px] leading-5 text-zinc-500">
+                    チラシ・フライヤー / 名刺 / ショップカード / メニュー表 / パンフレット
+                  </p>
+                </div>
+                <div class="rounded-xl border border-zinc-200 bg-white/80 p-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-[9px] text-zinc-400">03</span>
+                    <span class="text-xs font-semibold text-zinc-800">システム</span>
+                  </div>
+                  <p class="mt-2 text-[10px] leading-5 text-zinc-500">予約システム / 小型Webツール / 業務管理Webアプリ</p>
+                </div>
+              </div>
+            </div>
+            <div class="hero-reveal hero-reveal-3 relative mx-auto w-full max-w-lg">
+              <div class="absolute inset-6 rounded-full bg-zinc-100"></div>
+              <div class="relative aspect-square">
+                <div
+                  class="float-main absolute top-[9%] left-[8%] z-10 w-[84%] overflow-hidden rounded-2xl border border-zinc-300 bg-white shadow-2xl shadow-zinc-300/50"
+                >
+                  <div class="flex h-9 items-center gap-1.5 border-b border-zinc-200 px-4">
+                    <span class="size-1.5 rounded-full bg-zinc-300"></span>
+                    <span class="size-1.5 rounded-full bg-zinc-300"></span>
+                    <span class="size-1.5 rounded-full bg-zinc-300"></span>
+                    <span class="ml-3 h-4 flex-1 rounded bg-zinc-100"></span>
+                  </div>
+                  <div class="p-5 sm:p-7">
+                    <div class="flex items-center justify-between border-b border-zinc-200 pb-4">
+                      <div class="flex items-center gap-2"><span class="h-2 w-16 rounded-full bg-zinc-400"></span></div>
+                      <div class="flex gap-2">
+                        <span class="h-1.5 w-8 rounded-full bg-zinc-200"></span>
+                        <span class="h-1.5 w-8 rounded-full bg-zinc-200"></span>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-[1.1fr_0.9fr] items-center gap-5 py-7">
+                      <div>
+                        <div class="h-3 w-full rounded-full bg-brand"></div>
+                        <div class="mt-2 h-3 w-4/5 rounded-full bg-zinc-600"></div>
+                        <div class="mt-4 h-1.5 w-full rounded-full bg-zinc-200"></div>
+                        <div class="mt-2 h-1.5 w-2/3 rounded-full bg-zinc-200"></div>
+                        <div class="mt-5 h-6 w-20 rounded-full bg-brand"></div>
+                      </div>
+                      <div class="grid aspect-square place-items-center rounded-xl bg-zinc-100">
+                        <svg
+                          aria-hidden="true"
+                          class="size-10 text-brand"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                          <path d="M3 9h18M7 6.5h.01M10 6.5h.01"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                      <div class="h-12 rounded-lg bg-zinc-100"></div>
+                      <div class="h-12 rounded-lg bg-zinc-100"></div>
+                      <div class="h-12 rounded-lg bg-zinc-100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="float-card absolute bottom-[4%] left-0 z-20 w-[46%] -rotate-2 rounded-xl border border-zinc-300 bg-white p-4 shadow-xl shadow-zinc-300/60 sm:p-5"
+                >
+                  <div class="flex items-end justify-between gap-4">
+                    <div>
+                      <span class="font-mono text-[9px] tracking-widest text-zinc-400">SHOP CARD</span>
+                      <div class="mt-3 h-2 w-24 rounded-full bg-brand"></div>
+                      <div class="mt-2 h-1.5 w-16 rounded-full bg-zinc-200"></div>
+                    </div>
+                    <div class="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-300">
+                      <span class="text-xs font-semibold text-brand">S</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="float-system absolute right-0 bottom-0 z-30 w-[50%] rotate-2 rounded-xl border border-zinc-300 bg-white p-3 shadow-xl shadow-zinc-300/60 sm:p-4"
+                >
+                  <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5">
+                    <div class="flex items-center gap-2">
+                      <span class="grid size-6 place-items-center rounded-md bg-brand text-white">
+                        <svg
+                          aria-hidden="true"
+                          class="size-3.5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+                          <rect x="14" y="4" width="6" height="6" rx="1"></rect>
+                          <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+                          <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+                        </svg>
+                      </span>
+                      <span class="font-mono text-[7px] tracking-widest text-zinc-500 sm:text-[8px]">BUSINESS SYSTEM</span>
+                    </div>
+                    <span class="size-1.5 rounded-full bg-brand"></span>
+                  </div>
+                  <div class="mt-3 grid grid-cols-[0.7fr_1.3fr] gap-2">
+                    <div class="space-y-1.5">
+                      <span class="block h-1.5 w-full rounded-full bg-brand/20"></span>
+                      <span class="block h-1.5 w-4/5 rounded-full bg-zinc-200"></span>
+                      <span class="block h-1.5 w-3/5 rounded-full bg-zinc-200"></span>
+                    </div>
+                    <div class="flex h-12 items-end gap-1 rounded-md bg-zinc-50 px-2 pt-2">
+                      <span
+                        class="dashboard-bar flex-1 rounded-t-sm bg-brand"
+                        style="height: 35%; opacity: 0.35; animation-delay: 500ms"
+                      ></span>
+                      <span
+                        class="dashboard-bar flex-1 rounded-t-sm bg-brand"
+                        style="height: 65%; opacity: 0.47; animation-delay: 600ms"
+                      ></span>
+                      <span
+                        class="dashboard-bar flex-1 rounded-t-sm bg-brand"
+                        style="height: 48%; opacity: 0.59; animation-delay: 700ms"
+                      ></span>
+                      <span
+                        class="dashboard-bar flex-1 rounded-t-sm bg-brand"
+                        style="height: 80%; opacity: 0.71; animation-delay: 800ms"
+                      ></span>
+                      <span
+                        class="dashboard-bar flex-1 rounded-t-sm bg-brand"
+                        style="height: 58%; opacity: 0.83; animation-delay: 900ms"
+                      ></span>
+                    </div>
+                  </div>
+                  <div class="mt-2 space-y-1">
+                    <div class="flex items-center gap-2 rounded bg-zinc-50 px-2 py-1.5">
+                      <span class="size-1.5 rounded-full bg-brand/60"></span>
+                      <span class="h-1 flex-1 rounded-full bg-zinc-200"></span>
+                      <span class="h-1 rounded-full bg-zinc-300" style="width: 14%"></span>
+                    </div>
+                    <div class="flex items-center gap-2 rounded bg-zinc-50 px-2 py-1.5">
+                      <span class="size-1.5 rounded-full bg-brand/60"></span>
+                      <span class="h-1 flex-1 rounded-full bg-zinc-200"></span>
+                      <span class="h-1 rounded-full bg-zinc-300" style="width: 17.6%"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="border-b border-zinc-200 bg-white py-20 lg:py-28">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-zinc-50">
+              <div class="grid lg:grid-cols-[0.8fr_1.2fr]">
+                <div class="relative border-b border-zinc-200 p-8 sm:p-12 lg:border-r lg:border-b-0 lg:p-14">
+                  <div class="relative">
+                    <span class="inline-flex rounded-full border border-zinc-300 bg-white px-4 py-2 text-xs font-semibold text-zinc-500">
+                      まずはお悩みから
+                    </span>
+                    <h2 class="mt-10 max-w-sm text-3xl leading-tight font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">
+                      こんなお悩み、
+                      <br />
+                      ありませんか？
+                    </h2>
+                    <p class="mt-6 max-w-sm text-sm leading-7 text-zinc-600">
+                      まだ依頼内容が決まっていなくても大丈夫です。今感じている困りごとを、そのままお聞かせください。
+                    </p>
+                    <div class="mt-10 space-y-3">
+                      <div
+                        class="w-fit rounded-2xl rounded-bl-sm border border-zinc-200 bg-white px-4 py-3 text-xs text-zinc-600 shadow-sm"
+                      >
+                        こんな小さなことでも頼める？
+                      </div>
+                      <div class="ml-auto w-fit rounded-2xl rounded-br-sm bg-zinc-200 px-4 py-3 text-xs font-medium text-zinc-700">
+                        もちろん、ご相談ください。
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ol class="divide-y divide-zinc-200 bg-white px-6 sm:px-10">
+                  <li class="group flex gap-5 py-7 sm:gap-8 sm:py-8">
+                    <span
+                      class="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-300 font-mono text-xs text-zinc-500 transition group-hover:border-zinc-500 group-hover:bg-zinc-100"
+                    >
+                      01
+                    </span>
+                    <div class="pt-1.5">
+                      <p class="text-sm leading-7 font-medium text-zinc-800 sm:text-base">事業を始めたので、ホームページを用意したい</p>
+                    </div>
+                  </li>
+                  <li class="group flex gap-5 py-7 sm:gap-8 sm:py-8">
+                    <span
+                      class="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-300 font-mono text-xs text-zinc-500 transition group-hover:border-zinc-500 group-hover:bg-zinc-100"
+                    >
+                      02
+                    </span>
+                    <div class="pt-1.5">
+                      <p class="text-sm leading-7 font-medium text-zinc-800 sm:text-base">
+                        ショップカードやチラシでもっと効果的に紹介したい
+                      </p>
+                    </div>
+                  </li>
+                  <li class="group flex gap-5 py-7 sm:gap-8 sm:py-8">
+                    <span
+                      class="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-300 font-mono text-xs text-zinc-500 transition group-hover:border-zinc-500 group-hover:bg-zinc-100"
+                    >
+                      03
+                    </span>
+                    <div class="pt-1.5">
+                      <p class="text-sm leading-7 font-medium text-zinc-800 sm:text-base">
+                        身内で行うイベントなどの、イベント用ミニWebサイトがほしい
+                      </p>
+                    </div>
+                  </li>
+                  <li class="group flex gap-5 py-7 sm:gap-8 sm:py-8">
+                    <span
+                      class="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-300 font-mono text-xs text-zinc-500 transition group-hover:border-zinc-500 group-hover:bg-zinc-100"
+                    >
+                      04
+                    </span>
+                    <div class="pt-1.5">
+                      <p class="text-sm leading-7 font-medium text-zinc-800 sm:text-base">
+                        日々の業務や、毎月のデータ集計・事務作業に時間がかかる
+                      </p>
+                    </div>
+                  </li>
+                  <li class="group flex gap-5 py-7 sm:gap-8 sm:py-8">
+                    <span
+                      class="grid size-10 shrink-0 place-items-center rounded-full border border-zinc-300 font-mono text-xs text-zinc-500 transition group-hover:border-zinc-500 group-hover:bg-zinc-100"
+                    >
+                      05
+                    </span>
+                    <div class="pt-1.5">
+                      <p class="text-sm leading-7 font-medium text-zinc-800 sm:text-base">何を作ればいいのか、相談しながら決めたい</p>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+              <div
+                class="flex flex-col items-start justify-between gap-5 border-t border-zinc-200 bg-zinc-100 px-8 py-6 sm:flex-row sm:items-center sm:px-12"
+              >
+                <div>
+                  <p class="text-sm leading-6 font-medium text-zinc-700">
+                    制作会社に頼むほどではない、でも自分で作るのは大変。そんなときに。
+                  </p>
+                  <p class="mt-1 text-xs leading-6 text-zinc-500">小さなご相談も、一緒に整理するところからお手伝いします。</p>
+                </div>
+                <a href="#contact" class="group flex items-center gap-2 text-xs font-semibold text-zinc-700">
+                  相談してみる
+                  <svg
+                    aria-hidden="true"
+                    class="size-4 transition group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14m-5-5 5 5-5 5"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="services" class="py-24 lg:py-32">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div data-reveal="true" class="max-w-none">
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span>
+                <span>SERVICES</span>
+              </div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">できること</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600 md:whitespace-nowrap">
+                Webとデザイン、そして仕組みづくり。ビジネスのさまざまな課題を、3つの領域からサポートします。
+              </p>
+            </div>
+            <div class="mt-6 flex max-w-4xl gap-4 rounded-xl border border-zinc-300 bg-zinc-100 px-5 py-4">
+              <span
+                class="grid size-8 shrink-0 place-items-center rounded-full border border-zinc-400 font-mono text-xs font-semibold text-zinc-600"
+              >
+                i
+              </span>
+              <div>
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <p class="text-xs font-semibold text-zinc-800">ご相談前にご確認ください</p>
+                  <span class="font-mono text-[9px] tracking-widest text-zinc-400">PLEASE NOTE</span>
+                </div>
+                <p class="mt-1 text-xs leading-6 text-zinc-600">
+                  ご相談内容の規模や専門性によっては、対応が難しい場合がございます。内容を確認のうえ、対応可能な範囲や別の方法をご案内いたします。
+                </p>
+              </div>
+            </div>
+            <div data-reveal="true" class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <article
+                class="group rounded-2xl border border-zinc-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl hover:shadow-zinc-200/60 sm:p-9"
+              >
+                <div class="mb-10 flex items-start justify-between">
+                  <span
+                    class="grid size-12 place-items-center rounded-xl bg-zinc-100 transition group-hover:bg-brand group-hover:text-white"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="size-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                      <path d="M3 9h18M7 6.5h.01M10 6.5h.01"></path>
+                    </svg>
+                  </span>
+                  <span class="font-mono text-xs text-zinc-400">01</span>
+                </div>
+                <h3 class="text-xl font-semibold tracking-tight">Web制作</h3>
+                <p class="mt-2 text-sm text-zinc-500">伝えたい情報を、わかりやすく届ける。</p>
+                <ul class="mt-7 grid gap-3 border-t border-zinc-200 pt-6 text-sm text-zinc-700">
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    ホームページ・LP制作
+                  </li>
+                </ul>
+              </article>
+              <article
+                class="group rounded-2xl border border-zinc-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl hover:shadow-zinc-200/60 sm:p-9"
+              >
+                <div class="mb-10 flex items-start justify-between">
+                  <span
+                    class="grid size-12 place-items-center rounded-xl bg-zinc-100 transition group-hover:bg-brand group-hover:text-white"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="size-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m4 20 4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20Z"></path>
+                      <path d="m13.5 8 3 3M4 20l4.5-1-3-3L4 20Z"></path>
+                    </svg>
+                  </span>
+                  <span class="font-mono text-xs text-zinc-400">02</span>
+                </div>
+                <h3 class="text-xl font-semibold tracking-tight">デザイン制作</h3>
+                <p class="mt-2 text-sm text-zinc-500">ビジネスの魅力を、伝わるデザインに。</p>
+                <ul class="mt-7 grid gap-3 border-t border-zinc-200 pt-6 text-sm text-zinc-700">
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    チラシ・フライヤー
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    名刺・ショップカード
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    メニュー表・パンフレット
+                  </li>
+                </ul>
+              </article>
+              <article
+                class="group rounded-2xl border border-zinc-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-xl hover:shadow-zinc-200/60 sm:p-9"
+              >
+                <div class="mb-10 flex items-start justify-between">
+                  <span
+                    class="grid size-12 place-items-center rounded-xl bg-zinc-100 transition group-hover:bg-brand group-hover:text-white"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="size-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m8 9-3 3 3 3m8-6 3 3-3 3m-3-9-2 12"></path>
+                    </svg>
+                  </span>
+                  <span class="font-mono text-xs text-zinc-400">03</span>
+                </div>
+                <h3 class="text-xl font-semibold tracking-tight">業務効率化・システム開発</h3>
+                <p class="mt-2 text-sm text-zinc-500">面倒な作業を、仕組みでシンプルに。</p>
+                <ul class="mt-7 grid gap-3 border-t border-zinc-200 pt-6 text-sm text-zinc-700">
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    Excel・スプレッドシート自動化
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    データ集計
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 size-1 rounded-full bg-brand"></span>
+                    業務管理Webアプリ
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section class="border-y border-zinc-200 bg-zinc-50 py-24 lg:py-32">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div data-reveal="true" class="max-w-2xl">
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span>
+                <span>WHY US</span>
+              </div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">しみずWeb制作所が選ばれる理由</h2>
+            </div>
+            <div data-reveal="true" class="mt-14 grid border-t border-zinc-300 md:grid-cols-2">
+              <div class="border-b border-zinc-300 py-8 md:p-8 md:border-r">
+                <div class="flex gap-6">
+                  <span class="font-mono text-xs text-zinc-400">01</span>
+                  <div>
+                    <h3 class="text-lg font-semibold">相談から制作まで、まとめて対応</h3>
+                    <p class="mt-3 max-w-md text-sm leading-7 text-zinc-600">
+                      Webサイトやチラシ、業務効率化ツールまで、複数の依頼先に分けず幅広く対応します。
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="border-b border-zinc-300 py-8 md:p-8">
+                <div class="flex gap-6">
+                  <span class="font-mono text-xs text-zinc-400">02</span>
+                  <div>
+                    <h3 class="text-lg font-semibold">必要なものを、必要な分だけ</h3>
+                    <p class="mt-3 max-w-md text-sm leading-7 text-zinc-600">
+                      大規模な仕組みを前提とせず、ご予算や目的に合わせて適切な方法をご提案します。
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="border-b border-zinc-300 py-8 md:p-8 md:border-r">
+                <div class="flex gap-6">
+                  <span class="font-mono text-xs text-zinc-400">03</span>
+                  <div>
+                    <h3 class="text-lg font-semibold">技術とデザイン、両方の視点</h3>
+                    <p class="mt-3 max-w-md text-sm leading-7 text-zinc-600">
+                      見た目だけでなく、使いやすさやその後の運用まで考慮して制作します。
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="border-b border-zinc-300 py-8 md:p-8">
+                <div class="flex gap-6">
+                  <span class="font-mono text-xs text-zinc-400">04</span>
+                  <div>
+                    <h3 class="text-lg font-semibold">小さなご相談から歓迎</h3>
+                    <p class="mt-3 max-w-md text-sm leading-7 text-zinc-600">
+                      「何を作ればいい？」「これは実現できる？」という段階から、一緒に考えます。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="works" class="py-24 lg:py-32">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div class="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
+              <div data-reveal="true" class="max-w-2xl">
+                <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                  <span class="h-px w-8 bg-brand"></span>
+                  <span>SELECTED WORKS</span>
+                </div>
+                <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">制作実績・制作サンプル</h2>
+                <p class="mt-5 text-base leading-8 text-zinc-600">
+                  目的に合わせたWebサイト、印刷物、業務効率化ツールの制作イメージをご覧いただけます。
+                </p>
+              </div>
+              <span class="w-fit rounded-full border border-zinc-300 px-4 py-2 text-xs text-zinc-500">自主制作サンプル</span>
+            </div>
+            <div data-reveal="true" class="mt-14 grid gap-5 md:grid-cols-3">
+              <article class="group">
+                <div class="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-200">
+                  <img
+                    src="/aircon-house-cleaning-work.png"
+                    alt="地域密着のエアコン・ハウスクリーニング専門店のWebサイト制作例"
+                    class="size-full object-cover object-top transition duration-700 group-hover:scale-[1.025]"
+                  />
+                  <span
+                    class="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-semibold text-zinc-700 shadow-sm backdrop-blur"
+                  >
+                    実制作
+                  </span>
+                </div>
+                <p class="mt-5 font-mono text-[10px] tracking-widest text-zinc-400">WEB DESIGN / CLIENT WORK</p>
+                <h3 class="mt-2 font-semibold tracking-tight">地域密着のエアコン・ハウスクリーニング専門店</h3>
+              </article>
+              <article class="group">
+                <div class="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-300">
+                  <img
+                    src="/payroll-invoice-system-work.png"
+                    alt="個人事業主向け 給与・請求管理システムのWebサイト制作例"
+                    class="size-full object-cover object-top transition duration-700 group-hover:scale-[1.025]"
+                  />
+                  <span
+                    class="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-semibold text-zinc-700 shadow-sm backdrop-blur"
+                  >
+                    実制作
+                  </span>
+                </div>
+                <p class="mt-5 font-mono text-[10px] tracking-widest text-zinc-400">BUSINESS SYSTEM / CLIENT WORK</p>
+                <h3 class="mt-2 font-semibold tracking-tight">個人事業主向け 給与・請求管理システム</h3>
+              </article>
+              <article class="group">
+                <div class="relative aspect-[16/10] overflow-hidden rounded-2xl bg-[#e8ebe5]">
+                  <div class="absolute inset-0 flex items-center justify-center gap-3 bg-[#e8ebe5] p-4 sm:gap-5 sm:p-5">
+                    <div
+                      class="relative aspect-[5/7] h-full overflow-hidden bg-[#faf9f4] shadow-lg transition duration-500 group-hover:-translate-y-1 group-hover:-rotate-1"
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1611094607507-8c8173e5cf33?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080"
+                        alt="自然光の中でヨガをする女性"
+                        class="h-[52%] w-full object-cover object-center saturate-[0.7]"
+                      />
+                      <div class="absolute inset-x-0 top-[46%] mx-auto w-[82%] bg-[#faf9f4]/95 px-2 py-1.5 text-center shadow-sm">
+                        <p class="text-[5px] tracking-[0.2em] text-[#718074] sm:text-[6px]">SORA BODY &amp; YOGA</p>
+                      </div>
+                      <div class="px-3 pt-4 text-center sm:px-4">
+                        <p class="text-[8px] leading-[1.5] font-medium text-[#3f4942] sm:text-[10px]">
+                          からだと呼吸を、
+                          <br />
+                          やさしく整える。
+                        </p>
+                        <div class="mx-auto mt-2 h-px w-7 bg-[#93a196]"></div>
+                        <p class="mt-2 text-[5px] tracking-[0.08em] text-[#718074] sm:text-[6px]">整体 × やさしいヨガ</p>
+                        <p class="mt-2 inline-block rounded-full bg-[#718074] px-2.5 py-1 text-[5px] font-medium text-white sm:text-[6px]">
+                          体験レッスン受付中
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex aspect-[5/7] h-full flex-col bg-[#faf9f4] p-2.5 shadow-lg transition duration-500 group-hover:-translate-y-1 group-hover:rotate-1 sm:p-3"
+                    >
+                      <div class="flex items-start justify-between border-b border-[#c9d0ca] pb-1.5">
+                        <div>
+                          <p class="text-[4px] tracking-[0.18em] text-[#718074] sm:text-[5px]">MENU &amp; SCHEDULE</p>
+                          <p class="mt-0.5 text-[7px] font-medium text-[#3f4942] sm:text-[9px]">からだに合う整え方を。</p>
+                        </div>
+                        <p class="text-right text-[4px] leading-relaxed tracking-wide text-[#718074] sm:text-[5px]">
+                          SORA
+                          <br />
+                          BODY &amp; YOGA
+                        </p>
+                      </div>
+                      <div class="mt-1.5">
+                        <div class="mb-0.5 flex items-center gap-1">
+                          <span class="h-px flex-1 bg-[#c9d0ca]"></span>
+                          <p class="text-[4px] tracking-[0.16em] text-[#718074] sm:text-[5px]">MENU</p>
+                          <span class="h-px flex-1 bg-[#c9d0ca]"></span>
+                        </div>
+                        <div class="flex items-center border-b border-[#e2e5e1] py-0.5 text-[#3f4942]">
+                          <span class="flex-1 text-[4px] font-medium sm:text-[5px]">整体ケア</span>
+                          <span class="w-8 text-[3px] text-[#8a918c] sm:text-[4px]">60 min</span>
+                          <span class="text-[4px] sm:text-[5px]">6,600円</span>
+                        </div>
+                        <div class="flex items-center border-b border-[#e2e5e1] py-0.5 text-[#3f4942]">
+                          <span class="flex-1 text-[4px] font-medium sm:text-[5px]">少人数ヨガ</span>
+                          <span class="w-8 text-[3px] text-[#8a918c] sm:text-[4px]">45 min</span>
+                          <span class="text-[4px] sm:text-[5px]">2,200円</span>
+                        </div>
+                        <div class="flex items-center border-b border-[#e2e5e1] py-0.5 text-[#3f4942]">
+                          <span class="flex-1 text-[4px] font-medium sm:text-[5px]">パーソナルヨガ</span>
+                          <span class="w-8 text-[3px] text-[#8a918c] sm:text-[4px]">60 min</span>
+                          <span class="text-[4px] sm:text-[5px]">5,500円</span>
+                        </div>
+                      </div>
+                      <div class="mt-1.5 rounded-sm bg-[#e9ede7] px-2 py-1 text-center">
+                        <div class="flex items-center justify-center gap-1.5">
+                          <span class="text-[4px] tracking-wide text-[#718074] sm:text-[5px]">初回体験</span>
+                          <span class="text-[8px] font-medium text-[#3f4942] sm:text-[10px]">1,500円</span>
+                        </div>
+                        <p class="text-[3px] text-[#7a827c] sm:text-[4px]">カウンセリング・マットレンタル込み</p>
+                      </div>
+                      <div class="mt-1.5">
+                        <div class="flex items-center justify-between">
+                          <p class="text-[4px] tracking-[0.14em] text-[#718074] sm:text-[5px]">WEEKLY SCHEDULE</p>
+                          <p class="text-[3px] text-[#8a918c] sm:text-[4px]">水・日 定休</p>
+                        </div>
+                        <div class="mt-0.5 grid grid-cols-[1.4fr_repeat(5,1fr)] text-center text-[3px] text-[#59635c] sm:text-[4px]">
+                          <span class="border-r border-b border-[#dfe3de] py-0.5 bg-[#eef0eb] font-medium"></span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5 bg-[#eef0eb] font-medium">月</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5 bg-[#eef0eb] font-medium">火</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5 bg-[#eef0eb] font-medium">木</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5 bg-[#eef0eb] font-medium">金</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5 bg-[#eef0eb] font-medium">土</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">10:00</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">14:00</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">—</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">—</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">18:30</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">—</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">●</span>
+                          <span class="border-r border-b border-[#dfe3de] py-0.5">—</span>
+                        </div>
+                      </div>
+                      <div class="mt-auto flex items-end justify-between border-t border-[#c9d0ca] pt-1.5">
+                        <div class="text-[3px] leading-[1.6] text-[#717a73] sm:text-[4px]">
+                          <p class="font-medium text-[#3f4942]">SORA 整体・ヨガ</p>
+                          <p>○○市青葉町1-2-3 / 駅徒歩5分</p>
+                          <p>10:00–19:30　TEL 00-1234-5678</p>
+                        </div>
+                        <div
+                          class="grid size-7 place-items-center bg-[#3f4942] text-center text-[3px] leading-tight text-white sm:size-8 sm:text-[4px]"
+                        >
+                          WEB
+                          <br />
+                          予約
+                        </div>
+                      </div>
+                    </div>
+                    <span
+                      class="absolute top-3 left-3 rounded-full bg-white/90 px-2.5 py-1 text-[9px] font-semibold text-zinc-600 shadow-sm"
+                    >
+                      架空制作
+                    </span>
+                  </div>
+                </div>
+                <p class="mt-5 font-mono text-[10px] tracking-widest text-zinc-400">FLYER DESIGN / CONCEPT WORK</p>
+                <h3 class="mt-2 font-semibold tracking-tight">整体院・ヨガ教室 体験レッスン募集チラシ</h3>
+              </article>
+            </div>
+            <p class="mt-8 text-xs leading-6 text-zinc-500">
+              ※ 「実制作」の表記があるものは実際の制作例です。その他は自主制作サンプルとして掲載しています。
+            </p>
+          </div>
+        </section>
+        <section class="border-y border-zinc-200 bg-zinc-100 py-24 lg:py-32">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div data-reveal="true" class="max-w-2xl">
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span>
+                <span>PROCESS</span>
+              </div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">ご依頼の流れ</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600">お問い合わせから納品まで、丁寧にコミュニケーションを取りながら進めます。</p>
+            </div>
+            <div data-reveal="true" class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+              <div class="relative border-t border-zinc-300 pt-7">
+                <span class="absolute -top-2 left-0 grid size-4 place-items-center rounded-full bg-brand text-[8px] font-bold text-white">
+                  1
+                </span>
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 01</span>
+                <h3 class="mt-4 min-h-12 text-sm font-semibold">お問い合わせ</h3>
+                <p class="mt-3 text-xs leading-6 text-zinc-600">お困りごとを、お気軽にご相談ください。</p>
+              </div>
+              <div class="relative border-t border-zinc-300 pt-7">
+                <span class="absolute -top-2 left-0 grid size-4 place-items-center rounded-full bg-brand text-[8px] font-bold text-white">
+                  2
+                </span>
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 02</span>
+                <h3 class="mt-4 min-h-12 text-sm font-semibold">ヒアリング・お見積もり</h3>
+                <p class="mt-3 text-xs leading-6 text-zinc-600">目的やご予算、必要な機能を確認します。</p>
+              </div>
+              <div class="relative border-t border-zinc-300 pt-7">
+                <span class="absolute -top-2 left-0 grid size-4 place-items-center rounded-full bg-brand text-[8px] font-bold text-white">
+                  3
+                </span>
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 03</span>
+                <h3 class="mt-4 min-h-12 text-sm font-semibold">制作・開発</h3>
+                <p class="mt-3 text-xs leading-6 text-zinc-600">内容に合意いただいた後、制作を開始します。</p>
+              </div>
+              <div class="relative border-t border-zinc-300 pt-7">
+                <span class="absolute -top-2 left-0 grid size-4 place-items-center rounded-full bg-brand text-[8px] font-bold text-white">
+                  4
+                </span>
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 04</span>
+                <h3 class="mt-4 min-h-12 text-sm font-semibold">ご確認・修正</h3>
+                <p class="mt-3 text-xs leading-6 text-zinc-600">制作物をご確認いただき、修正します。</p>
+              </div>
+              <div class="relative border-t border-zinc-300 pt-7">
+                <span class="absolute -top-2 left-0 grid size-4 place-items-center rounded-full bg-brand text-[8px] font-bold text-white">
+                  5
+                </span>
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 05</span>
+                <h3 class="mt-4 min-h-12 text-sm font-semibold">納品</h3>
+                <p class="mt-3 text-xs leading-6 text-zinc-600">完成した制作物や必要なデータをお渡しします。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="price" class="py-24 lg:py-32">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+              <div>
+                <div data-reveal="true" class="max-w-2xl">
+                  <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                    <span class="h-px w-8 bg-brand"></span>
+                    <span>PRICE GUIDE</span>
+                  </div>
+                  <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">料金の目安</h2>
+                  <p class="mt-5 text-base leading-8 text-zinc-600">
+                    ご相談内容に合わせて個別にお見積もりします。まずは予算感だけでも気軽にお聞かせください。
+                  </p>
+                </div>
+                <div class="mt-8 rounded-2xl bg-zinc-100 p-5 text-xs leading-6 text-zinc-500">
+                  掲載価格は目安です。制作範囲や機能を確認したうえで正式なお見積もりをご案内します。外部サービス利用料や印刷費は別途となる場合があります。
+                </div>
+              </div>
+              <div data-reveal="true" class="overflow-hidden rounded-2xl border border-zinc-200">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 hover:bg-zinc-50">
+                  <span class="text-sm text-zinc-600">ホームページ・LP制作（ページ数や規模により変動）</span>
+                  <span class="font-mono text-sm font-semibold">5万円〜</span>
+                </div>
+                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 hover:bg-zinc-50">
+                  <span class="text-sm text-zinc-600">チラシ制作</span>
+                  <span class="font-mono text-sm font-semibold">1万円〜</span>
+                </div>
+                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 hover:bg-zinc-50">
+                  <span class="text-sm text-zinc-600">名刺・ショップカード</span>
+                  <span class="font-mono text-sm font-semibold">5,000円〜</span>
+                </div>
+                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 hover:bg-zinc-50">
+                  <span class="text-sm text-zinc-600">業務自動化</span>
+                  <span class="font-mono text-sm font-semibold">10万円〜</span>
+                </div>
+                <div class="flex items-center justify-between px-6 py-4 hover:bg-zinc-50">
+                  <span class="text-sm text-zinc-600">小規模Webアプリ</span>
+                  <span class="font-mono text-sm font-semibold">10万円〜</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="border-y border-zinc-200 bg-zinc-50 py-24 lg:py-32">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal="true" class="mx-auto max-w-2xl text-center">
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand justify-center">
+                <span class="h-px w-8 bg-brand"></span>
+                <span>FAQ</span>
+              </div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">よくある質問</h2>
+            </div>
+            <div data-reveal="true" class="mt-12 divide-y divide-zinc-300 border-y border-zinc-300">
+              <details class="group py-1" open="">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4">
+                    <span class="font-mono text-zinc-400">Q.</span>
+                    何を依頼すればよいかわからなくても相談できますか？
+                  </span>
+                  <span
+                    class="grid size-7 shrink-0 place-items-center rounded-full border border-zinc-300 text-lg font-light group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="flex gap-4 pb-6 pr-12 text-sm leading-7 text-zinc-600">
+                  <span class="font-mono text-zinc-400">A.</span>
+                  <p>はい。目的やお困りごとをお聞きし、必要な制作物や解決方法をご提案します。</p>
+                </div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4">
+                    <span class="font-mono text-zinc-400">Q.</span>
+                    小さな依頼でも対応できますか？
+                  </span>
+                  <span
+                    class="grid size-7 shrink-0 place-items-center rounded-full border border-zinc-300 text-lg font-light group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="flex gap-4 pb-6 pr-12 text-sm leading-7 text-zinc-600">
+                  <span class="font-mono text-zinc-400">A.</span>
+                  <p>はい。名刺やチラシ1点の制作、既存サイトの一部修正などもご相談いただけます。</p>
+                </div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4">
+                    <span class="font-mono text-zinc-400">Q.</span>
+                    予算が決まっているのですが、相談できますか？
+                  </span>
+                  <span
+                    class="grid size-7 shrink-0 place-items-center rounded-full border border-zinc-300 text-lg font-light group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="flex gap-4 pb-6 pr-12 text-sm leading-7 text-zinc-600">
+                  <span class="font-mono text-zinc-400">A.</span>
+                  <p>はい。ご予算に応じて、対応できる範囲や優先順位をご提案します。</p>
+                </div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4">
+                    <span class="font-mono text-zinc-400">Q.</span>
+                    納品後の修正や更新もお願いできますか？
+                  </span>
+                  <span
+                    class="grid size-7 shrink-0 place-items-center rounded-full border border-zinc-300 text-lg font-light group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="flex gap-4 pb-6 pr-12 text-sm leading-7 text-zinc-600">
+                  <span class="font-mono text-zinc-400">A.</span>
+                  <p>はい。対応内容や費用を事前に確認したうえで、追加の修正・更新にも対応します。</p>
+                </div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4">
+                    <span class="font-mono text-zinc-400">Q.</span>
+                    対応できるかわからない内容でも相談できますか？
+                  </span>
+                  <span
+                    class="grid size-7 shrink-0 place-items-center rounded-full border border-zinc-300 text-lg font-light group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="flex gap-4 pb-6 pr-12 text-sm leading-7 text-zinc-600">
+                  <span class="font-mono text-zinc-400">A.</span>
+                  <p>はい。内容を確認し、対応可能な方法や代替案をご案内します。</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+        <section id="about" class="py-24 lg:py-32">
+          <div class="mx-auto max-w-7xl px-5 lg:px-8">
+            <div data-reveal="true" class="grid items-center gap-14 lg:grid-cols-2">
+              <div class="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100">
+                <div
+                  class="absolute inset-0 bg-[linear-gradient(to_right,#d4d4d8_1px,transparent_1px),linear-gradient(to_bottom,#d4d4d8_1px,transparent_1px)] bg-[size:40px_40px] opacity-50"
+                ></div>
+                <div class="absolute inset-0 grid place-items-center">
+                  <div class="grid size-40 place-items-center rounded-full border border-zinc-300 bg-white shadow-xl">
+                    <svg
+                      aria-hidden="true"
+                      class="size-16 text-zinc-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="8" r="4"></circle>
+                      <path d="M4 21a8 8 0 0 1 16 0"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="absolute right-5 bottom-5 left-5 flex items-center justify-between rounded-xl border border-zinc-200 bg-white/90 p-4 backdrop-blur"
+                >
+                  <span>
+                    <span class="block text-[10px] tracking-widest text-zinc-400">OWNER / CREATOR</span>
+                    <span class="mt-1 block text-sm font-semibold">しみずWeb制作所</span>
+                  </span>
+                  <span class="grid size-9 place-items-center rounded-lg bg-brand text-white">
+                    <svg
+                      aria-hidden="true"
+                      class="size-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m8 9-3 3 3 3m8-6 3 3-3 3m-3-9-2 12"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div data-reveal="true" class="max-w-2xl">
+                  <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                    <span class="h-px w-8 bg-brand"></span>
+                    <span>PROFILE</span>
+                  </div>
+                  <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">つくる人のこと</h2>
+                </div>
+                <div class="mt-8 space-y-5 text-sm leading-8 text-zinc-600">
+                  <p>Webアプリケーション開発の経験を活かし、Web制作・デザイン・業務効率化のサポートを行っています。</p>
+                  <p>
+                    ホームページや印刷物の制作から、日々の業務を効率化するツールの開発まで、お客様の目的や課題に合わせたご提案を大切にしています。
+                  </p>
+                  <p class="border-l-2 border-brand pl-5 font-medium text-zinc-900">
+                    「こんなことを実現したい」という想いを、技術と工夫でカタチにするお手伝いをします。
+                  </p>
+                </div>
+                <div class="mt-8 flex flex-wrap gap-2">
+                  <span class="rounded-full border border-zinc-300 px-4 py-2 text-xs text-zinc-500">Web Development</span>
+                  <span class="rounded-full border border-zinc-300 px-4 py-2 text-xs text-zinc-500">UI / Graphic Design</span>
+                  <span class="rounded-full border border-zinc-300 px-4 py-2 text-xs text-zinc-500">Automation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="contact" class="px-3 pb-3 sm:px-5 sm:pb-5">
+          <div
+            class="relative overflow-hidden rounded-3xl border border-brand/20 bg-brand/10 px-5 py-20 text-center text-zinc-950 sm:px-8 lg:py-28"
+          >
+            <div
+              class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,#439CE4_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.16]"
+            ></div>
+            <div class="relative mx-auto max-w-3xl">
+              <div class="mx-auto mb-7 flex w-fit items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span>
+                <span>CONTACT</span>
+              </div>
+              <h2 class="text-4xl leading-tight font-semibold tracking-[-0.045em] sm:text-5xl">まずはお気軽にご相談ください。</h2>
+              <p class="mx-auto mt-7 max-w-2xl text-sm leading-8 text-zinc-700 sm:text-base">
+                ホームページ、チラシ、業務効率化など、どんなことでも大丈夫です。
+                <br class="hidden sm:block" />
+                ご相談内容を伺い、目的やご予算に合わせた方法をご提案します。
+              </p>
+              <a
+                href="mailto:contact@example.com"
+                class="cta-shine group mx-auto mt-10 flex w-fit items-center gap-4 rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-brand/20 transition hover:bg-brand/85"
+              >
+                相談・見積もりを依頼する
+                <svg
+                  aria-hidden="true"
+                  class="size-5 transition group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14m-5-5 5 5-5 5"></path>
+                </svg>
+              </a>
+              <div class="mx-auto mt-10 flex max-w-2xl flex-wrap justify-center gap-2.5">
+                <span class="rounded-full border border-zinc-300 bg-white/80 px-4 py-2 text-xs text-zinc-700">ご相談内容</span>
+                <span class="rounded-full border border-zinc-300 bg-white/80 px-4 py-2 text-xs text-zinc-700">ご希望の納期</span>
+                <span class="rounded-full border border-zinc-300 bg-white/80 px-4 py-2 text-xs text-zinc-700">
+                  ご予算（決まっている場合）
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="px-5 py-10 lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <a href="#top" class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <img src="/shimizu-logo.jpeg" alt="" class="h-full w-auto max-w-none" />
+            </span>
+            <span class="text-sm font-semibold">しみずWeb制作所</span>
+          </a>
+          <p class="text-[10px] tracking-wider text-zinc-400">© 2025 しみずWEB制作所. ALL RIGHTS RESERVED.</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (() => {
+        const elements = Array.from(document.querySelectorAll("[data-reveal]"));
+        document.documentElement.classList.add("motion-ready");
+
+        if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          elements.forEach((element) => element.classList.add("is-visible"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -48px" },
+        );
+
+        elements.forEach((element) => observer.observe(element));
+      })();
+    </script>
+  </body>
+</html>

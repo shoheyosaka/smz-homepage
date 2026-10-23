@@ -37,10 +37,13 @@ open index.html
 ### 画像やページ間のリンクまで確認したいとき
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 5500
 ```
 
-ブラウザで http://localhost:8000 を開きます。止めるときは `Ctrl + C`。
+ブラウザで http://localhost:5500 を開きます（制作の流れは http://localhost:5500/flow/ ）。止めるときは `Ctrl + C`。
+
+- 必ずこのリポジトリのフォルダ（`index.html` がある場所）で実行してください。
+- `Address already in use` と出たり、別のアプリの画面が出たりするときは、そのポートを他のアプリ（Docker など）が使っています。`5501` など別の番号に変えてください。
 
 ## 編集ガイド
 

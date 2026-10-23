@@ -60,7 +60,7 @@ python3 -m http.server 5500
 | 料金 | `id="price"` |
 | よくある質問 | `よくある質問` |
 | プロフィール | `id="about"` |
-| お問い合わせ先 | `mailto:` |
+| 相談フォームのリンク先 | `forms.gle` |
 | 制作の流れ・修正ルール・期間 | `flow/index.html` を開く |
 
 ### 色・フォントを変える
@@ -115,5 +115,5 @@ git push
 ## TODO
 
 - [x] 画像3点（ロゴ・制作実績2点）を追加
-- [ ] お問い合わせ先 `contact@example.com` を実際のアドレスに変更
+- [x] 「相談・見積もりを依頼する」ボタンを Google フォーム（`https://forms.gle/LRZBeRYDgYt1CrgJ7`）につなぐ
 - [ ] プロフィール写真の差し替え（現在はアイコンのみ）

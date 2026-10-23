@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>業務効率化・システム開発｜しみずWeb制作所</title>
+    <meta
+      name="description"
+      content="美容室やトリミングサロンの予約・顧客管理、個人事業主の事務作業など、紙やExcelで行っている管理をひとつにまとめる、小〜中規模の業務効率化ツールを作ります。"
+    />
+    <link rel="icon" href="/shimizu-logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-brand: #439ce4;
+        --font-sans: "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+        --font-brand: "Zen Maru Gothic", "Noto Sans JP", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 4.5rem;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      /* ヒーローの段階表示 */
+      @keyframes hero-in {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .hero-reveal {
+        animation: hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .hero-reveal-1 {
+        animation-delay: 0.05s;
+      }
+      .hero-reveal-2 {
+        animation-delay: 0.15s;
+      }
+      .hero-reveal-3 {
+        animation-delay: 0.25s;
+      }
+      .hero-reveal-4 {
+        animation-delay: 0.35s;
+      }
+      .hero-reveal-5 {
+        animation-delay: 0.45s;
+      }
+
+      /* ヒーローのモックアップがふわっと浮く */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .float-main {
+        animation: float 7s ease-in-out infinite;
+      }
+      .float-card {
+        animation: float 6s ease-in-out 0.8s infinite;
+      }
+      .float-system {
+        animation: float 6.5s ease-in-out 1.6s infinite;
+      }
+
+      @keyframes bar-grow {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: scaleY(1);
+        }
+      }
+      .dashboard-bar {
+        transform-origin: bottom;
+        animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      /* ボタンの光沢 */
+      .cta-shine {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .cta-shine::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+        transform: translateX(-120%);
+        animation: shine 4s ease-in-out 1.5s infinite;
+      }
+      @keyframes shine {
+        0%,
+        60% {
+          transform: translateX(-120%);
+        }
+        100% {
+          transform: translateX(120%);
+        }
+      }
+
+      /* スクロール時のフェードイン */
+      .motion-ready [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .motion-ready [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-reveal,
+        .float-main,
+        .float-card,
+        .float-system,
+        .dashboard-bar,
+        .cta-shine::after {
+          animation: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* 制作の流れページのタイムライン */
+      .flow-item {
+        position: relative;
+        padding-left: 2.25rem;
+        padding-bottom: 2.5rem;
+      }
+      .flow-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.45rem;
+        width: 14px;
+        height: 14px;
+        border-radius: 9999px;
+        border: 2px solid var(--color-zinc-300);
+        background: var(--color-white);
+      }
+      .flow-item.is-client::before {
+        border-color: var(--color-brand);
+        background: var(--color-brand);
+      }
+      .flow-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 1.6rem;
+        bottom: 0.25rem;
+        width: 2px;
+        background: var(--color-zinc-200);
+      }
+    </style>
+  </head>
+  <body class="bg-white font-sans antialiased">
+    <div class="min-h-screen bg-white text-zinc-950">
+      <header class="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/90 backdrop-blur-lg">
+        <div class="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 lg:px-8">
+          <a href="/" class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <img src="/shimizu-logo.jpeg" alt="" class="h-full w-auto max-w-none" />
+            </span>
+            <span class="font-brand text-[15px] font-medium tracking-[0.04em]">しみずWeb制作所</span>
+          </a>
+          <nav class="hidden items-center gap-7 text-xs font-medium text-zinc-600 md:flex">
+            <a class="transition hover:text-brand" href="/#services">サービス</a>
+            <a class="transition hover:text-brand" href="/#works">制作実績</a>
+            <a class="transition hover:text-brand" href="/#price">料金</a>
+            <a class="transition hover:text-brand" href="/#about">私たちについて</a>
+          </nav>
+          <a
+            href="/#contact"
+            class="group flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-brand/85"
+          >
+            相談する
+            <svg aria-hidden="true" class="size-4 transition group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14m-5-5 5 5-5 5"></path>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      <main id="top">
+        <!-- ページ見出し -->
+        <section class="relative overflow-hidden border-b border-zinc-200">
+          <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] bg-[size:64px_64px] opacity-35"></div>
+          <div class="relative mx-auto max-w-4xl px-5 py-14 lg:px-8 lg:py-20">
+            <nav class="hero-reveal hero-reveal-1 mb-8 flex items-center gap-2 text-xs text-zinc-500" aria-label="パンくずリスト">
+              <a href="/" class="transition hover:text-brand">トップ</a>
+              <span class="text-zinc-300">/</span>
+              <a href="/#services" class="transition hover:text-brand">サービス</a>
+              <span class="text-zinc-300">/</span>
+              <span class="text-zinc-800">業務効率化・システム開発</span>
+            </nav>
+            <div class="hero-reveal hero-reveal-1 mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+              <span class="h-px w-8 bg-brand"></span><span>BUSINESS TOOLS</span>
+            </div>
+            <h1 class="hero-reveal hero-reveal-2 text-[clamp(1.9rem,6vw,3.25rem)] leading-[1.25] font-semibold tracking-[-0.05em]">
+              <span class="block">あなたのお仕事専用の、</span>
+              <span class="block text-brand">ちょうどいい業務ツール。</span>
+            </h1>
+            <p class="hero-reveal hero-reveal-3 mt-6 max-w-2xl text-base leading-8 text-zinc-600">
+              紙の台帳、Excel、スプレッドシート、LINEのメモ。あちこちに分かれている情報をひとつにまとめて、毎日の手間を減らす専用ツールを作ります。大きな会社向けのシステムではなく、小さなお店や個人事業主の方のお仕事に合わせた、小〜中規模の業務効率化が専門です。
+            </p>
+            <div class="hero-reveal hero-reveal-4 mt-8 flex flex-wrap gap-3">
+              <a href="https://forms.gle/LRZBeRYDgYt1CrgJ7" target="_blank" rel="noopener noreferrer" class="cta-shine group flex items-center gap-3 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/85">
+                相談してみる
+                <svg aria-hidden="true" class="size-4 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
+              </a>
+              <a href="#examples" class="flex items-center gap-3 rounded-full border border-zinc-300 bg-white px-6 py-3.5 text-sm font-semibold transition hover:border-zinc-500">活用例を見る</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- お悩み -->
+        <section class="py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>PROBLEMS</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">こんなお悩み、ありませんか？</h2>
+            </div>
+            <ul data-reveal class="mt-10 grid gap-3 sm:grid-cols-2">
+              <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand"></span>
+                <span class="text-sm leading-7 text-zinc-700">予約が電話・LINE・紙の台帳に分かれていて、ダブルブッキングが心配</span>
+              </li>
+              <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand"></span>
+                <span class="text-sm leading-7 text-zinc-700">お客様のカルテや来店履歴が紙で、探すのに時間がかかる</span>
+              </li>
+              <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand"></span>
+                <span class="text-sm leading-7 text-zinc-700">毎月の売上集計や請求書づくりを、Excelで手作業している</span>
+              </li>
+              <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand"></span>
+                <span class="text-sm leading-7 text-zinc-700">同じ内容を、紙からExcelへ、Excelから別の表へと何度も書き写している</span>
+              </li>
+              <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand"></span>
+                <span class="text-sm leading-7 text-zinc-700">スタッフ同士で、予約やお客様の情報をうまく共有できていない</span>
+              </li>
+              <li class="flex gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-brand"></span>
+                <span class="text-sm leading-7 text-zinc-700">既製の予約・管理サービスは機能が多すぎたり月額が高かったりして、自分のやり方に合わない</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ビフォー・アフター -->
+        <section class="border-y border-zinc-200 bg-zinc-50 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>BEFORE / AFTER</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">バラバラの管理を、ひとつに。</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600">今お使いの紙やExcelのやり方をもとに、必要な情報だけを1つの画面にまとめます。</p>
+            </div>
+            <div data-reveal class="mt-10 grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr]">
+              <div class="rounded-2xl border border-zinc-200 bg-white p-6">
+                <p class="font-mono text-[10px] tracking-widest text-zinc-400">BEFORE</p>
+                <p class="mt-2 font-semibold">いまの管理</p>
+                <ul class="mt-4 grid gap-2 text-sm text-zinc-600">
+                  <li class="flex items-center gap-3 rounded-lg bg-zinc-50 px-3 py-2.5"><span class="font-mono text-[10px] text-zinc-400">紙</span>予約台帳・お客様カルテ</li>
+                  <li class="flex items-center gap-3 rounded-lg bg-zinc-50 px-3 py-2.5"><span class="font-mono text-[10px] text-zinc-400">表</span>売上・請求のExcel</li>
+                  <li class="flex items-center gap-3 rounded-lg bg-zinc-50 px-3 py-2.5"><span class="font-mono text-[10px] text-zinc-400">話</span>電話・LINEの予約メモ</li>
+                  <li class="flex items-center gap-3 rounded-lg bg-zinc-50 px-3 py-2.5"><span class="font-mono text-[10px] text-zinc-400">頭</span>スタッフの記憶だけにある情報</li>
+                </ul>
+              </div>
+              <div class="grid place-items-center text-brand">
+                <svg aria-hidden="true" class="size-8 rotate-90 md:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
+              </div>
+              <div class="rounded-2xl border border-brand/30 bg-white p-6 shadow-xl shadow-zinc-200/60">
+                <p class="font-mono text-[10px] tracking-widest text-brand">AFTER</p>
+                <p class="mt-2 font-semibold">あなた専用のツール</p>
+                <ul class="mt-4 grid gap-2 text-sm text-zinc-700">
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>予約・お客様情報・売上が1つの画面で見られる</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>スマホでもパソコンでも、どこからでも確認できる</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>一度入れた情報は、集計や書類づくりにそのまま使える</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>スタッフ全員が同じ最新の情報を見られる</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 活用例 -->
+        <section id="examples" class="scroll-mt-18 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>EXAMPLES</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">たとえば、こんなツールが作れます</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600">業種ごとの一例です。実際には、お客様のお仕事の進め方に合わせて、必要な機能だけを組み合わせます。</p>
+            </div>
+            <div data-reveal class="mt-10 grid gap-4">
+              <article class="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-xl font-semibold tracking-tight">美容室</h3>
+                  <span class="font-mono text-[10px] tracking-widest text-zinc-400">HAIR SALON</span>
+                </div>
+                <p class="mt-2 text-sm text-zinc-500">予約とお客様カルテを、ひとつに。</p>
+                <div class="mt-6 grid gap-6 border-t border-zinc-200 pt-6 sm:grid-cols-2">
+                  <div>
+                    <p class="text-xs font-semibold text-zinc-400">いまのお困りごと</p>
+                    <p class="mt-2 text-sm leading-7 text-zinc-600">予約は紙の台帳、カラーの配合や前回の施術内容は手書きのカルテ。担当者が休みの日は、前回の内容がすぐに分からない。</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-brand">作れるツール</p>
+                    <ul class="mt-2 grid gap-1.5 text-sm text-zinc-700">
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>スタッフ別・時間別の予約表</li>
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>来店履歴・施術内容・使用薬剤のカルテ</li>
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>日別・月別の売上集計</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-xl font-semibold tracking-tight">トリミングサロン</h3>
+                  <span class="font-mono text-[10px] tracking-widest text-zinc-400">PET SALON</span>
+                </div>
+                <p class="mt-2 text-sm text-zinc-500">ワンちゃんの情報と予約を、すぐに見られるように。</p>
+                <div class="mt-6 grid gap-6 border-t border-zinc-200 pt-6 sm:grid-cols-2">
+                  <div>
+                    <p class="text-xs font-semibold text-zinc-400">いまのお困りごと</p>
+                    <p class="mt-2 text-sm leading-7 text-zinc-600">犬種や体重、皮膚の状態、苦手なことなどの注意点が紙に書かれていて、予約のたびに探している。次回の来店時期の声かけも忘れがち。</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-brand">作れるツール</p>
+                    <ul class="mt-2 grid gap-1.5 text-sm text-zinc-700">
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>飼い主さん・ペットごとの情報と注意事項</li>
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>コース・料金つきの予約管理</li>
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>前回の来店から日数がたったお客様の一覧</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-xl font-semibold tracking-tight">個人事業主の事務作業</h3>
+                  <span class="font-mono text-[10px] tracking-widest text-zinc-400">BACK OFFICE</span>
+                </div>
+                <p class="mt-2 text-sm text-zinc-500">毎月の集計や書類づくりを、ボタンひとつに近づける。</p>
+                <div class="mt-6 grid gap-6 border-t border-zinc-200 pt-6 sm:grid-cols-2">
+                  <div>
+                    <p class="text-xs font-semibold text-zinc-400">いまのお困りごと</p>
+                    <p class="mt-2 text-sm leading-7 text-zinc-600">月末になると、Excelの売上表から請求書を1枚ずつ作り、給与や経費も別の表で計算している。転記ミスが心配。</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold text-brand">作れるツール</p>
+                    <ul class="mt-2 grid gap-1.5 text-sm text-zinc-700">
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>入力した売上から請求書・見積書を作成</li>
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>給与・経費の計算と月別の集計</li>
+                      <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>今あるExcel・スプレッドシートの自動化</li>
+                    </ul>
+                  </div>
+                </div>
+                <a href="/#works" class="group mt-6 flex w-fit items-center gap-2 text-xs font-semibold text-brand">
+                  制作実績「個人事業主向け 給与・請求管理システム」を見る
+                  <svg aria-hidden="true" class="size-4 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
+                </a>
+              </article>
+            </div>
+            <p class="mt-5 text-xs leading-6 text-zinc-500">ここにない業種でも大丈夫です。「今こうやって管理している」という紙やExcelを見せていただければ、どんな形にできるかご提案します。</p>
+          </div>
+        </section>
+
+        <!-- 特長 -->
+        <section class="border-y border-zinc-200 bg-zinc-50 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>FEATURES</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">小さなお仕事のための、専用ツールづくり</h2>
+            </div>
+            <div data-reveal class="mt-10 grid border-t border-zinc-300 md:grid-cols-2">
+              <div class="border-b border-zinc-300 py-7 md:border-r md:p-7">
+                <h3 class="font-semibold">今のやり方に合わせて作ります</h3>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">ツールに仕事を合わせるのではなく、慣れている紙やExcelの項目・流れをもとに作るので、使い始めで戸惑いにくくなります。</p>
+              </div>
+              <div class="border-b border-zinc-300 py-7 md:p-7">
+                <h3 class="font-semibold">必要な機能だけ</h3>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">使わない機能は入れません。画面がシンプルになり、パソコンが得意でない方やスタッフさんでも迷わず使えます。</p>
+              </div>
+              <div class="border-b border-zinc-300 py-7 md:border-r md:p-7">
+                <h3 class="font-semibold">スマホでもパソコンでも</h3>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">ブラウザで動くので、アプリのインストールは不要です。お店のパソコンでも、外出先のスマホでも同じ情報を見られます。</p>
+              </div>
+              <div class="border-b border-zinc-300 py-7 md:p-7">
+                <h3 class="font-semibold">小さく始めて、育てられる</h3>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">まずは一番困っている作業から。使いながら「ここも楽にしたい」が出てきたら、あとから機能を足せます。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 対応範囲 -->
+        <section class="py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>SCOPE</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">対応できる規模について</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600">小さなお店や個人事業主、数名〜十数名ほどのチームで使う、小〜中規模のツールを専門にしています。</p>
+            </div>
+            <div data-reveal class="mt-10 grid gap-4 md:grid-cols-2">
+              <div class="rounded-2xl border border-brand/30 bg-white p-6">
+                <p class="text-sm font-semibold text-brand">得意なこと</p>
+                <ul class="mt-4 grid gap-2.5 text-sm text-zinc-700">
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>予約・顧客・在庫などの管理ツール</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>売上・経費・給与などの集計</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>請求書・見積書などの書類づくりの自動化</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>Excel・スプレッドシートの作業の自動化</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-brand"></span>紙の台帳や今あるExcelからのデータの引っ越し</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border border-zinc-300 bg-zinc-50 p-6">
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <p class="text-sm font-semibold text-zinc-800">対応が難しい場合があること</p>
+                  <span class="font-mono text-[9px] tracking-widest text-zinc-400">PLEASE NOTE</span>
+                </div>
+                <ul class="mt-4 grid gap-2.5 text-sm text-zinc-600">
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-zinc-400"></span>大人数で使う会社全体の基幹システム</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-zinc-400"></span>一般のお客様が大量に利用するサービス</li>
+                  <li class="flex items-start gap-2"><span class="mt-2 size-1 shrink-0 rounded-full bg-zinc-400"></span>多数の外部システムとの複雑な連携</li>
+                </ul>
+                <p class="mt-4 text-xs leading-6 text-zinc-500">内容を確認のうえ、対応できる範囲や、既製のサービスを使う方法などもあわせてご案内します。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 進め方 -->
+        <section class="border-y border-zinc-200 bg-zinc-50 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>FLOW</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">ご依頼の流れ</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600">お客様にお願いする作業がある工程には、青い印を付けています。</p>
+            </div>
+            <ol class="flow mt-10">
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">お問い合わせ</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">「この作業が面倒」「これをまとめたい」といった、ざっくりしたご相談で大丈夫です。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">今の作業を見せていただく（ヒアリング）</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">今お使いの紙の台帳やExcelを見せていただきながら、どの作業に時間がかかっているか、誰がどこで使うかをお聞きします。</p>
+                <div class="mt-4 rounded-xl border border-brand/20 bg-brand/5 px-5 py-4 text-sm leading-7 text-zinc-700">
+                  <p class="text-xs font-semibold text-brand">ご用意いただくと話が早いもの</p>
+                  <p class="mt-1">今使っている台帳・Excel・スプレッドシート（写真やコピーでOK）、一番困っている作業のメモ</p>
+                </div>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">ご提案・お見積もり</h3>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">作る機能と、まずはどこから始めるかをご提案し、お見積もりをお送りします。ご納得いただけたら、正式にご依頼ください。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">画面イメージのご確認</h3>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">本格的に作る前に、画面のイメージを実際に触っていただきます。「この項目もほしい」「ここは要らない」をこの段階で決めます。</p>
+              </li>
+              <li class="flow-item">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">開発</h3>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">決まった内容でツールを作ります。途中経過もお見せしながら進めます。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">データの引っ越し・使い方のご説明</h3>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">今あるExcelなどのデータを新しいツールに移し、使い方をご説明します。スタッフの方への説明もお任せください。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">使いながら改善</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">実際に使ってみて気づいた不便な点や、追加したい機能があればご相談ください。内容に応じてお見積もりのうえ対応します。</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- 料金 -->
+        <section class="py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>PRICE GUIDE</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">料金の目安</h2>
+            </div>
+            <div data-reveal class="mt-10 overflow-hidden rounded-2xl border border-zinc-200">
+              <div class="flex items-center justify-between border-b border-zinc-200 px-6 py-4">
+                <span class="text-sm text-zinc-600">業務自動化（Excel・スプレッドシートの自動化など）</span>
+                <span class="font-mono text-sm font-semibold whitespace-nowrap">10万円〜</span>
+              </div>
+              <div class="flex items-center justify-between px-6 py-4">
+                <span class="text-sm text-zinc-600">小規模Webアプリ（予約・顧客管理など）</span>
+                <span class="font-mono text-sm font-semibold whitespace-nowrap">10万円〜</span>
+              </div>
+            </div>
+            <p class="mt-5 text-xs leading-6 text-zinc-500">機能の数や、データの引っ越しの量によって変わります。ツールを動かすためのサーバー代など、月々の費用がかかる場合は、お見積もりの際にあわせてご案内します。</p>
+          </div>
+        </section>
+
+        <!-- よくある質問 -->
+        <section class="border-y border-zinc-200 bg-zinc-50 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>FAQ</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">よくある質問</h2>
+            </div>
+            <div data-reveal class="mt-10 divide-y divide-zinc-300 border-y border-zinc-300">
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4"><span class="font-mono text-zinc-400">Q.</span>パソコンが苦手でも使えますか？</span>
+                  <span class="grid size-7 shrink-0 place-items-center text-xl font-light text-zinc-500 transition group-open:rotate-45">+</span>
+                </summary>
+                <div class="flex gap-4 pr-12 pb-6 text-sm leading-7 text-zinc-600"><span class="font-mono text-zinc-400">A.</span><p>はい。必要な機能だけに絞り、普段の言葉で画面を作るので、操作はシンプルです。使い始めるときに、使い方もご説明します。</p></div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4"><span class="font-mono text-zinc-400">Q.</span>今のExcelや紙のデータは使えますか？</span>
+                  <span class="grid size-7 shrink-0 place-items-center text-xl font-light text-zinc-500 transition group-open:rotate-45">+</span>
+                </summary>
+                <div class="flex gap-4 pr-12 pb-6 text-sm leading-7 text-zinc-600"><span class="font-mono text-zinc-400">A.</span><p>はい。Excelやスプレッドシートのデータは、新しいツールに引っ越しできます。紙の台帳の場合は、量や内容に応じて入力の方法をご相談させてください。</p></div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4"><span class="font-mono text-zinc-400">Q.</span>あとから機能を追加できますか？</span>
+                  <span class="grid size-7 shrink-0 place-items-center text-xl font-light text-zinc-500 transition group-open:rotate-45">+</span>
+                </summary>
+                <div class="flex gap-4 pr-12 pb-6 text-sm leading-7 text-zinc-600"><span class="font-mono text-zinc-400">A.</span><p>はい。まずは一番困っている作業から作り、使いながら少しずつ機能を足していく進め方をおすすめしています。</p></div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4"><span class="font-mono text-zinc-400">Q.</span>既製の予約サービスと何が違いますか？</span>
+                  <span class="grid size-7 shrink-0 place-items-center text-xl font-light text-zinc-500 transition group-open:rotate-45">+</span>
+                </summary>
+                <div class="flex gap-4 pr-12 pb-6 text-sm leading-7 text-zinc-600"><span class="font-mono text-zinc-400">A.</span><p>既製のサービスは手軽に始められる一方、項目や流れを自由に変えにくいことがあります。専用ツールは、お客様のお仕事の進め方に合わせて作れるのが違いです。ご相談内容によっては、既製のサービスのほうが合う場合もあり、その際は正直にお伝えします。</p></div>
+              </details>
+              <details class="group py-1">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-sm font-semibold">
+                  <span class="flex gap-4"><span class="font-mono text-zinc-400">Q.</span>何を作ればいいか決まっていなくても相談できますか？</span>
+                  <span class="grid size-7 shrink-0 place-items-center text-xl font-light text-zinc-500 transition group-open:rotate-45">+</span>
+                </summary>
+                <div class="flex gap-4 pr-12 pb-6 text-sm leading-7 text-zinc-600"><span class="font-mono text-zinc-400">A.</span><p>はい。「毎月この作業に半日かかっている」といったお困りごとを教えていただければ、どんな形で楽にできるかをご提案します。</p></div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <!-- お問い合わせ -->
+        <section id="contact" class="px-3 pt-16 pb-3 sm:px-5 sm:pb-5 lg:pt-24">
+          <div class="relative overflow-hidden rounded-3xl border border-brand/20 bg-brand/10 px-5 py-20 text-center text-zinc-950 sm:px-8 lg:py-24">
+            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,#439CE4_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.16]"></div>
+            <div class="relative mx-auto max-w-3xl">
+              <div class="mx-auto mb-7 flex w-fit items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span><span>CONTACT</span>
+              </div>
+              <h2 class="text-3xl leading-tight font-semibold tracking-[-0.045em] sm:text-4xl">その作業、もっと楽にできるかもしれません。</h2>
+              <p class="mx-auto mt-6 max-w-2xl text-sm leading-8 text-zinc-700 sm:text-base">「この作業が面倒」というお困りごとからで大丈夫です。今のやり方をお聞きして、ちょうどいい方法をご提案します。</p>
+              <div class="mt-10 flex flex-wrap justify-center gap-3">
+                <a href="https://forms.gle/LRZBeRYDgYt1CrgJ7" target="_blank" rel="noopener noreferrer" class="cta-shine group flex w-fit items-center gap-4 rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-brand/20 transition hover:bg-brand/85">
+                  相談・見積もりを依頼する
+                  <svg aria-hidden="true" class="size-5 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
+                </a>
+                <a href="/" class="flex items-center gap-3 rounded-full border border-zinc-300 bg-white px-7 py-4 text-sm font-semibold transition hover:border-zinc-500">トップへ戻る</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="px-5 py-10 lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <a href="/" class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <img src="/shimizu-logo.jpeg" alt="" class="h-full w-auto max-w-none" />
+            </span>
+            <span class="text-sm font-semibold">しみずWeb制作所</span>
+          </a>
+          <p class="text-[10px] tracking-wider text-zinc-400">© 2025 しみずWEB制作所. ALL RIGHTS RESERVED.</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (() => {
+        const elements = Array.from(document.querySelectorAll("[data-reveal]"));
+        document.documentElement.classList.add("motion-ready");
+
+        if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          elements.forEach((element) => element.classList.add("is-visible"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -48px" },
+        );
+
+        elements.forEach((element) => observer.observe(element));
+      })();
+    </script>
+  </body>
+</html>

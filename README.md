@@ -12,6 +12,8 @@
 ├── index.html                          # トップページ（/）
 ├── flow/
 │   └── index.html                      # Web制作の流れ（/flow）
+├── system/
+│   └── index.html                      # 業務効率化・システム開発（/system）
 ├── shimizu-logo.jpeg                   # ロゴ・ファビコン
 ├── aircon-house-cleaning-work.png      # 制作実績のサムネイル
 ├── payroll-invoice-system-work.png     # 制作実績のサムネイル
@@ -62,6 +64,7 @@ python3 -m http.server 5500
 | プロフィール | `id="about"` |
 | 相談フォームのリンク先 | `forms.gle` |
 | 制作の流れ・修正ルール・期間 | `flow/index.html` を開く |
+| 業務効率化の活用例・料金・FAQ | `system/index.html` を開く |
 
 ### 色・フォントを変える
 

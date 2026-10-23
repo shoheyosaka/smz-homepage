@@ -185,8 +185,11 @@
           <div
             class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] bg-[size:64px_64px] opacity-35"
           ></div>
-          <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-14">
-            <div>
+          <!-- スマホでは「見出し → イラスト → ボタン」の順、PCでは左に見出しとボタン・右にイラスト -->
+          <div
+            class="relative mx-auto grid max-w-7xl items-center gap-y-10 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-14 lg:gap-y-0 lg:px-8 lg:py-14"
+          >
+            <div class="lg:col-start-1 lg:row-start-2">
               <div
                 class="hero-reveal hero-reveal-1 mb-7 inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 shadow-sm"
               >
@@ -204,7 +207,9 @@
                 <br class="hidden sm:block" />
                 必要なものを、必要な分だけ。
               </p>
-              <div class="hero-reveal hero-reveal-4 mt-9 flex flex-wrap gap-3">
+            </div>
+            <div class="order-3 lg:col-start-1 lg:row-start-3 lg:mt-9">
+              <div class="hero-reveal hero-reveal-4 flex flex-wrap gap-3">
                 <a
                   href="#services"
                   class="cta-shine group flex items-center gap-3 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/85"
@@ -247,7 +252,7 @@
                 </div>
               </div>
             </div>
-            <div class="hero-reveal hero-reveal-3 relative mx-auto w-full max-w-lg">
+            <div class="hero-reveal hero-reveal-3 relative order-2 mx-auto w-full max-w-lg lg:col-start-2 lg:row-span-4 lg:row-start-1">
               <div class="absolute inset-6 rounded-full bg-zinc-100"></div>
               <div class="relative aspect-square">
                 <div

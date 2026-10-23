@@ -777,59 +777,64 @@
         </section>
         <section id="price" class="py-24 lg:py-32">
           <div class="mx-auto max-w-7xl px-5 lg:px-8">
-            <div class="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
-              <div>
-                <div data-reveal="true" class="max-w-2xl">
-                  <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
-                    <span class="h-px w-8 bg-brand"></span>
-                    <span>PRICE GUIDE</span>
+            <div data-reveal="true" class="max-w-3xl">
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span>
+                <span>PRICE GUIDE</span>
+              </div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">料金の目安</h2>
+              <p class="mt-5 text-base leading-8 text-zinc-600">
+                ご相談内容に合わせて個別にお見積もりします。まずは予算感だけでも気軽にお聞かせください。
+              </p>
+            </div>
+
+            <div data-reveal="true" class="mt-12 grid gap-5 lg:grid-cols-2">
+              <!-- 制作費 -->
+              <div class="flex flex-col rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8">
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">PRODUCTION</span>
+                <h3 class="mt-2 text-lg font-semibold">制作費</h3>
+                <p class="mt-1 text-xs leading-6 text-zinc-500">はじめに一度だけかかる費用です。</p>
+                <dl class="mt-6 divide-y divide-zinc-200 border-y border-zinc-200">
+                  <div class="flex items-baseline justify-between gap-4 py-4">
+                    <dt class="text-sm text-zinc-700">ホームページ・LP制作</dt>
+                    <dd class="font-mono text-base font-semibold whitespace-nowrap">5万円〜</dd>
                   </div>
-                  <h2 class="text-3xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-4xl">料金の目安</h2>
-                  <p class="mt-5 text-base leading-8 text-zinc-600">
-                    ご相談内容に合わせて個別にお見積もりします。まずは予算感だけでも気軽にお聞かせください。
-                  </p>
-                </div>
-                <div class="mt-8 rounded-2xl bg-zinc-100 p-5 text-xs leading-6 text-zinc-500">
-                  掲載価格は目安です。制作範囲や機能を確認したうえで正式なお見積もりをご案内します。ドメイン代・サーバー代は、制作費とは別にかかります。
-                </div>
+                  <div class="flex items-baseline justify-between gap-4 py-4">
+                    <dt class="text-sm text-zinc-700">業務自動化</dt>
+                    <dd class="font-mono text-base font-semibold whitespace-nowrap">10万円〜</dd>
+                  </div>
+                  <div class="flex items-baseline justify-between gap-4 py-4">
+                    <dt class="text-sm text-zinc-700">小規模Webアプリ</dt>
+                    <dd class="font-mono text-base font-semibold whitespace-nowrap">10万円〜</dd>
+                  </div>
+                </dl>
+                <p class="mt-auto pt-5 text-xs leading-6 text-zinc-500">ページ数や機能、規模によって変わります。</p>
               </div>
-              <div data-reveal="true" class="grid content-start gap-5">
-              <div class="overflow-hidden rounded-2xl border border-zinc-200">
-                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 hover:bg-zinc-50">
-                  <span class="text-sm text-zinc-600">ホームページ・LP制作（ページ数や規模により変動）</span>
-                  <span class="font-mono text-sm font-semibold">5万円〜</span>
-                </div>
-                <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 hover:bg-zinc-50">
-                  <span class="text-sm text-zinc-600">業務自動化</span>
-                  <span class="font-mono text-sm font-semibold">10万円〜</span>
-                </div>
-                <div class="flex items-center justify-between px-6 py-4 hover:bg-zinc-50">
-                  <span class="text-sm text-zinc-600">小規模Webアプリ</span>
-                  <span class="font-mono text-sm font-semibold">10万円〜</span>
-                </div>
-              </div>
-              <div class="rounded-2xl border border-zinc-300 bg-zinc-50 p-6">
-                <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <p class="text-sm font-semibold text-zinc-900">公開・運用にかかる費用（お客様のご負担）</p>
-                  <span class="font-mono text-[9px] tracking-widest text-zinc-400">PLEASE NOTE</span>
-                </div>
-                <p class="mt-2 text-xs leading-6 text-zinc-600">
-                  ホームページやアプリを公開して使い続けるには、ドメイン代・サーバー代が必要です。これらは制作費とは別に、<strong class="font-semibold text-zinc-900">必ずお客様のご負担</strong>となります。お客様のお名前でご契約いただき、各サービスへ直接お支払いください。
+
+              <!-- 公開・運用費 -->
+              <div class="flex flex-col rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8">
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">RUNNING COST</span>
+                <h3 class="mt-2 text-lg font-semibold">公開・運用費</h3>
+                <p class="mt-1 text-xs leading-6 text-zinc-500">公開して使い続けるあいだ、毎年・毎月かかる費用です。</p>
+                <dl class="mt-6 divide-y divide-zinc-200 border-y border-zinc-200">
+                  <div class="flex items-baseline justify-between gap-4 py-4">
+                    <dt class="text-sm text-zinc-700">ドメイン代<span class="mt-0.5 block text-xs text-zinc-500">ホームページの住所（例：〇〇.com）</span></dt>
+                    <dd class="text-right font-mono text-base font-semibold"><span class="whitespace-nowrap">年 1,500円前後〜</span><span class="mt-0.5 block text-xs font-normal text-zinc-500">.jp は年 3,000〜4,000円ほど</span></dd>
+                  </div>
+                  <div class="flex items-baseline justify-between gap-4 py-4">
+                    <dt class="text-sm text-zinc-700">サーバー代<span class="mt-0.5 block text-xs text-zinc-500">業務ツール・アプリの場合</span></dt>
+                    <dd class="text-right font-mono text-base font-semibold"><span class="whitespace-nowrap">月 0〜10,000円ほど</span><span class="mt-0.5 block text-xs font-normal text-zinc-500">機能や人数、データ量で変動</span></dd>
+                  </div>
+                </dl>
+                <p class="mt-auto pt-5 text-xs leading-6 text-zinc-500">
+                  制作費とは別に、<strong class="font-semibold text-zinc-800">必ずお客様のご負担</strong>となります。お客様のお名前でご契約いただき、各サービスへ直接お支払いください。
                 </p>
-                <div class="mt-4 divide-y divide-zinc-200 rounded-xl border border-zinc-200 bg-white">
-                  <div class="flex items-start justify-between gap-4 px-4 py-3">
-                    <span class="text-xs leading-5 text-zinc-700">ドメイン代<span class="block text-[10px] text-zinc-500">ホームページの住所（例：〇〇.com）</span></span>
-                    <span class="text-right font-mono text-xs font-semibold whitespace-nowrap">年 1,500円前後〜<span class="block text-[10px] font-normal text-zinc-500">.jp は年 3,000〜4,000円ほど</span></span>
-                  </div>
-                  <div class="flex items-start justify-between gap-4 px-4 py-3">
-                    <span class="text-xs leading-5 text-zinc-700">サーバー代（業務ツール・アプリ）<span class="block text-[10px] text-zinc-500">データを保存して動かす場所</span></span>
-                    <span class="text-right font-mono text-xs font-semibold whitespace-nowrap">月 0〜10,000円ほど<span class="block text-[10px] font-normal text-zinc-500">機能や使う人数、データ量で変わります</span></span>
-                  </div>
-                </div>
-                <p class="mt-3 text-[10px] leading-5 text-zinc-500">金額は目安です。実際にかかる金額は、お見積もりの際にあわせてご案内します。</p>
-              </div>
               </div>
             </div>
+
+            <p class="mt-6 text-xs leading-6 text-zinc-500">
+              ※ 掲載価格はすべて目安です。制作範囲や機能を確認したうえで、正式なお見積もりと実際にかかる運用費をご案内します。
+            </p>
           </div>
         </section>
         <section class="border-y border-zinc-200 bg-zinc-50 py-24 lg:py-32">

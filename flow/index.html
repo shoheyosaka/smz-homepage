@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ホームページ制作の流れ｜しみずWeb制作所</title>
+    <meta
+      name="description"
+      content="ホームページ・LP制作、チラシや名刺などのデザイン制作、業務効率化ツールの開発まで。小さなご相談から対応する、しみずWeb制作所です。"
+    />
+    <link rel="icon" href="/shimizu-logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-brand: #439ce4;
+        --font-sans: "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+        --font-brand: "Zen Maru Gothic", "Noto Sans JP", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 4.5rem;
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      /* ヒーローの段階表示 */
+      @keyframes hero-in {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .hero-reveal {
+        animation: hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .hero-reveal-1 {
+        animation-delay: 0.05s;
+      }
+      .hero-reveal-2 {
+        animation-delay: 0.15s;
+      }
+      .hero-reveal-3 {
+        animation-delay: 0.25s;
+      }
+      .hero-reveal-4 {
+        animation-delay: 0.35s;
+      }
+      .hero-reveal-5 {
+        animation-delay: 0.45s;
+      }
+
+      /* ヒーローのモックアップがふわっと浮く */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .float-main {
+        animation: float 7s ease-in-out infinite;
+      }
+      .float-card {
+        animation: float 6s ease-in-out 0.8s infinite;
+      }
+      .float-system {
+        animation: float 6.5s ease-in-out 1.6s infinite;
+      }
+
+      @keyframes bar-grow {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: scaleY(1);
+        }
+      }
+      .dashboard-bar {
+        transform-origin: bottom;
+        animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      /* ボタンの光沢 */
+      .cta-shine {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .cta-shine::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+        transform: translateX(-120%);
+        animation: shine 4s ease-in-out 1.5s infinite;
+      }
+      @keyframes shine {
+        0%,
+        60% {
+          transform: translateX(-120%);
+        }
+        100% {
+          transform: translateX(120%);
+        }
+      }
+
+      /* スクロール時のフェードイン */
+      .motion-ready [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .motion-ready [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-reveal,
+        .float-main,
+        .float-card,
+        .float-system,
+        .dashboard-bar,
+        .cta-shine::after {
+          animation: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* 制作の流れページのタイムライン */
+      .flow-item {
+        position: relative;
+        padding-left: 2.25rem;
+        padding-bottom: 2.5rem;
+      }
+      .flow-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.45rem;
+        width: 14px;
+        height: 14px;
+        border-radius: 9999px;
+        border: 2px solid var(--color-zinc-300);
+        background: var(--color-white);
+      }
+      .flow-item.is-client::before {
+        border-color: var(--color-brand);
+        background: var(--color-brand);
+      }
+      .flow-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 1.6rem;
+        bottom: 0.25rem;
+        width: 2px;
+        background: var(--color-zinc-200);
+      }
+    </style>
+  </head>
+  <body class="bg-white font-sans antialiased">
+    <div class="min-h-screen bg-white text-zinc-950">
+      <header class="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/90 backdrop-blur-lg">
+        <div class="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 lg:px-8">
+          <a href="/" class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <img src="/shimizu-logo.jpeg" alt="" class="h-full w-auto max-w-none" />
+            </span>
+            <span class="font-brand text-[15px] font-medium tracking-[0.04em]">しみずWeb制作所</span>
+          </a>
+          <nav class="hidden items-center gap-7 text-xs font-medium text-zinc-600 md:flex">
+            <a class="transition hover:text-brand" href="/#services">サービス</a>
+            <a class="transition hover:text-brand" href="/#works">制作サンプル</a>
+            <a class="transition hover:text-brand" href="/#price">料金</a>
+            <a class="transition hover:text-brand" href="/#about">私たちについて</a>
+          </nav>
+          <a
+            href="/#contact"
+            class="group flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-brand/85"
+          >
+            相談する
+            <svg aria-hidden="true" class="size-4 transition group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14m-5-5 5 5-5 5"></path>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      <main id="top">
+        <!-- ページ見出し -->
+        <section class="relative overflow-hidden border-b border-zinc-200">
+          <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] bg-[size:64px_64px] opacity-35"></div>
+          <div class="relative mx-auto max-w-4xl px-5 py-14 lg:px-8 lg:py-20">
+            <nav class="hero-reveal hero-reveal-1 mb-8 flex items-center gap-2 text-xs text-zinc-500" aria-label="パンくずリスト">
+              <a href="/" class="transition hover:text-brand">トップ</a>
+              <span class="text-zinc-300">/</span>
+              <a href="/#services" class="transition hover:text-brand">サービス</a>
+              <span class="text-zinc-300">/</span>
+              <span class="text-zinc-800">Web制作の流れ</span>
+            </nav>
+            <div class="hero-reveal hero-reveal-1 mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+              <span class="h-px w-8 bg-brand"></span><span>WEB PRODUCTION FLOW</span>
+            </div>
+            <h1 class="hero-reveal hero-reveal-2 text-[clamp(1.9rem,6vw,3.25rem)] leading-[1.2] font-semibold tracking-[-0.05em]">
+              ホームページ制作の流れ
+            </h1>
+            <p class="hero-reveal hero-reveal-3 mt-6 max-w-2xl text-base leading-8 text-zinc-600">
+              お問い合わせから公開、その後の更新まで、どんな順番で進むのかをまとめました。お客様にお願いする作業がある工程には、青い印を付けています。
+            </p>
+            <div class="hero-reveal hero-reveal-3 mt-6 flex flex-wrap gap-5 text-xs text-zinc-600">
+              <span class="flex items-center gap-2"><span class="size-3 rounded-full bg-brand"></span>お客様にお願いする工程</span>
+              <span class="flex items-center gap-2"><span class="size-3 rounded-full border-2 border-zinc-300 bg-white"></span>制作所が進める工程</span>
+            </div>
+
+            <div class="hero-reveal hero-reveal-4 mt-10 grid max-w-4xl grid-cols-2 gap-2 md:grid-cols-4">
+              <a href="#prepare" class="group rounded-xl border border-zinc-200 bg-white/80 p-4 transition hover:border-brand/40">
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 01</span>
+                <span class="mt-1 block text-sm font-semibold text-zinc-900 group-hover:text-brand">準備</span>
+                <span class="mt-1 block text-[11px] leading-5 text-zinc-500">相談・見積もり・素材</span>
+              </a>
+              <a href="#make" class="group rounded-xl border border-zinc-200 bg-white/80 p-4 transition hover:border-brand/40">
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 02</span>
+                <span class="mt-1 block text-sm font-semibold text-zinc-900 group-hover:text-brand">制作</span>
+                <span class="mt-1 block text-[11px] leading-5 text-zinc-500">デザイン・確認・修正</span>
+              </a>
+              <a href="#launch" class="group rounded-xl border border-zinc-200 bg-white/80 p-4 transition hover:border-brand/40">
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 03</span>
+                <span class="mt-1 block text-sm font-semibold text-zinc-900 group-hover:text-brand">公開</span>
+                <span class="mt-1 block text-[11px] leading-5 text-zinc-500">ドメイン・公開設定</span>
+              </a>
+              <a href="#after" class="group rounded-xl border border-zinc-200 bg-white/80 p-4 transition hover:border-brand/40">
+                <span class="font-mono text-[10px] tracking-widest text-zinc-400">STEP 04</span>
+                <span class="mt-1 block text-sm font-semibold text-zinc-900 group-hover:text-brand">公開後</span>
+                <span class="mt-1 block text-[11px] leading-5 text-zinc-500">更新・お知らせ</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 01 準備 -->
+        <section id="prepare" class="scroll-mt-18 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal class="flex flex-wrap items-end justify-between gap-4 border-b border-zinc-300 pb-5">
+              <div>
+                <div class="mb-4 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>STEP 01</span></div>
+                <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">準備</h2>
+              </div>
+              <span class="rounded-full border border-zinc-300 px-4 py-1.5 text-xs text-zinc-500">目安 1〜2週間</span>
+            </div>
+
+            <ol class="flow mt-10">
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">お問い合わせ</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">「ホームページを作りたい」「今のサイトを新しくしたい」など、まだぼんやりしていても大丈夫です。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">打ち合わせ（ヒアリング）</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                  <span class="rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                  <span class="ml-auto font-mono text-[10px] text-zinc-400">1時間ほど</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">オンラインまたは対面で、お店のこと、ホームページで実現したいこと、ご予算や希望の公開時期をお聞きします。</p>
+                <div class="mt-4 rounded-xl bg-zinc-50 px-5 py-4 text-sm leading-7 text-zinc-700">
+                  <p class="text-xs font-semibold text-brand">考えておいていただくと話が早いこと</p>
+                  <p class="mt-1">ホームページを見た人にしてほしいこと（電話・予約・来店など）、参考にしたいサイト、載せたいページ</p>
+                </div>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">お見積もり・ご依頼の確定</h3>
+                  <span class="rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">ページ数や内容をもとにお見積もりをお送りします。内容と金額にご納得いただけたら、正式にご依頼ください。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">素材のご準備</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">ホームページに載せる情報や写真をお送りください。揃っている物からで大丈夫です。ないものは一緒に考えます。</p>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div class="rounded-xl border border-zinc-200 p-4">
+                    <p class="text-sm font-semibold">お店・会社の基本情報 <span class="ml-1 text-[10px] font-semibold text-brand">必須</span></p>
+                    <p class="mt-1 text-xs leading-6 text-zinc-500">名前、住所、電話番号、営業時間、定休日、メールアドレス</p>
+                  </div>
+                  <div class="rounded-xl border border-zinc-200 p-4">
+                    <p class="text-sm font-semibold">写真 <span class="ml-1 text-[10px] font-semibold text-brand">必須</span></p>
+                    <p class="mt-1 text-xs leading-6 text-zinc-500">店内・外観・商品・スタッフなど。スマホの写真で構いません。明るい場所で横向きに撮ると使いやすいです</p>
+                  </div>
+                  <div class="rounded-xl border border-zinc-200 p-4">
+                    <p class="text-sm font-semibold">ロゴ <span class="ml-1 text-[10px] text-zinc-400">あれば</span></p>
+                    <p class="mt-1 text-xs leading-6 text-zinc-500">元のデータ（ai、pdf、png など）があれば一番きれいです。なければ画像でもOK</p>
+                  </div>
+                  <div class="rounded-xl border border-zinc-200 p-4">
+                    <p class="text-sm font-semibold">メニュー・料金 <span class="ml-1 text-[10px] text-zinc-400">あれば</span></p>
+                    <p class="mt-1 text-xs leading-6 text-zinc-500">今お使いのメニュー表やチラシの写真でもOKです</p>
+                  </div>
+                  <div class="rounded-xl border border-zinc-200 p-4">
+                    <p class="text-sm font-semibold">お店の紹介文 <span class="ml-1 text-[10px] text-zinc-400">あれば</span></p>
+                    <p class="mt-1 text-xs leading-6 text-zinc-500">こだわりや強み、お客様によく言われること。箇条書きのメモで十分です</p>
+                  </div>
+                  <div class="rounded-xl border border-zinc-200 p-4">
+                    <p class="text-sm font-semibold">SNS・地図のリンク <span class="ml-1 text-[10px] text-zinc-400">あれば</span></p>
+                    <p class="mt-1 text-xs leading-6 text-zinc-500">Instagram、LINE公式、Googleマップなど</p>
+                  </div>
+                </div>
+                <p class="mt-4 border-l-2 border-brand pl-4 text-xs leading-6 text-zinc-500">
+                  写真はLINEで送ると画質が落ちることがあります。Googleドライブやギガファイル便など、元の画質のまま送れる方法がおすすめです。
+                </p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- STEP 02 制作 -->
+        <section id="make" class="scroll-mt-18 border-y border-zinc-200 bg-zinc-50 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal class="flex flex-wrap items-end justify-between gap-4 border-b border-zinc-300 pb-5">
+              <div>
+                <div class="mb-4 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>STEP 02</span></div>
+                <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">制作</h2>
+              </div>
+              <span class="rounded-full border border-zinc-300 bg-white px-4 py-1.5 text-xs text-zinc-500">目安 1〜3週間</span>
+            </div>
+
+            <ol class="flow mt-10">
+              <li class="flow-item">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">構成・デザインのご提案</h3>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">どのページに何を載せるか（構成）と、色や雰囲気（デザイン）の案をお見せします。この段階で方向性を決めておくと、後からの大きなやり直しを防げます。</p>
+              </li>
+              <li class="flow-item">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">制作</h3>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">決まったデザインをもとに、スマホでもパソコンでも見やすいホームページを作ります。できあがったら、確認用のURLをお送りします。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">ご確認・修正のご依頼</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">確認用のURLを<strong class="font-semibold text-zinc-900">スマホとパソコンの両方</strong>で開いて、次の点を見てください。</p>
+                <ul class="mt-3 grid gap-2 text-sm text-zinc-700">
+                  <li class="flex items-start gap-2"><span class="mt-2.5 size-1 shrink-0 rounded-full bg-brand"></span>お店の名前、住所、電話番号、営業時間に間違いがないか</li>
+                  <li class="flex items-start gap-2"><span class="mt-2.5 size-1 shrink-0 rounded-full bg-brand"></span>料金やメニューの金額が正しいか</li>
+                  <li class="flex items-start gap-2"><span class="mt-2.5 size-1 shrink-0 rounded-full bg-brand"></span>電話番号を押すと電話がかかるか、地図やSNSのリンクが正しく開くか</li>
+                  <li class="flex items-start gap-2"><span class="mt-2.5 size-1 shrink-0 rounded-full bg-brand"></span>写真の使い方や、文章の言い回しで気になる所がないか</li>
+                </ul>
+                <div class="mt-5 rounded-xl border border-brand/20 bg-brand/5 px-5 py-4 text-sm leading-7 text-zinc-700">
+                  <p class="text-xs font-semibold text-brand">修正のご依頼は</p>
+                  <p class="mt-1">「どのページの、どこを、どう直すか」をまとめて1回でお送りください。スクリーンショットに丸を付けたものでも大丈夫です。</p>
+                </div>
+                <div class="mt-5 overflow-x-auto rounded-xl border border-zinc-200 bg-white">
+                  <table class="w-full text-left text-sm">
+                    <thead class="bg-zinc-50 text-xs text-zinc-500">
+                      <tr><th class="px-5 py-3 font-medium">修正のタイミング・内容</th><th class="px-5 py-3 font-medium whitespace-nowrap">費用</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-200">
+                      <tr><td class="px-5 py-3.5 text-zinc-700">公開前（STEP 03「公開・最終確認」より前）の修正</td><td class="px-5 py-3.5 font-semibold whitespace-nowrap text-brand">3回まで無料</td></tr>
+                      <tr><td class="px-5 py-3.5 text-zinc-700">公開後1か月以内の軽い修正<span class="mt-0.5 block text-xs text-zinc-500">文言の修正、画像の差し替えなど</span></td><td class="px-5 py-3.5 font-semibold whitespace-nowrap text-brand">無料</td></tr>
+                      <tr><td class="px-5 py-3.5 text-zinc-700">公開後の項目の追加・デザインの変更</td><td class="px-5 py-3.5 font-semibold whitespace-nowrap">別途お見積もり</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="mt-3 text-xs leading-6 text-zinc-500">公開前の修正が4回目以降になる場合や、上の表に当てはまらない修正は、事前にお見積もりをお伝えしてから進めます。</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- STEP 03 公開 -->
+        <section id="launch" class="scroll-mt-18 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal class="flex flex-wrap items-end justify-between gap-4 border-b border-zinc-300 pb-5">
+              <div>
+                <div class="mb-4 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>STEP 03</span></div>
+                <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">公開</h2>
+              </div>
+              <span class="rounded-full border border-zinc-300 px-4 py-1.5 text-xs text-zinc-500">目安 1〜3日</span>
+            </div>
+
+            <ol class="flow mt-10">
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">ドメインの用意</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                  <span class="ml-auto font-mono text-[10px] text-zinc-400">20〜30分</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">ホームページの住所（例：shimizuweb.com）をお客様のお名前で購入し、制作担当を招待していただきます。詳しい手順は別の資料「ホームページ公開までのご案内」でご説明します。</p>
+                <p class="mt-3 border-l-2 border-brand pl-4 text-xs leading-6 text-zinc-500">制作の途中で進めていただいても構いません。早めに済ませておくと、確認が終わってすぐに公開できます。</p>
+              </li>
+              <li class="flow-item">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">公開の設定</h3>
+                  <span class="rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">ドメインとホームページをつなぎ、https（鍵マーク）の設定まで行います。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">公開・最終確認</h3>
+                  <span class="rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">公開できたらURLをお知らせします。お客様のスマホでも開けることを確認してください。名刺やチラシ、Googleマップのお店情報にもURLを載せると見てもらいやすくなります。</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- STEP 04 公開後 -->
+        <section id="after" class="scroll-mt-18 border-y border-zinc-200 bg-zinc-50 py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal class="flex flex-wrap items-end justify-between gap-4 border-b border-zinc-300 pb-5">
+              <div>
+                <div class="mb-4 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>STEP 04</span></div>
+                <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">公開後</h2>
+              </div>
+            </div>
+
+            <ol class="flow mt-10">
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">内容の更新</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                  <span class="rounded bg-zinc-200/70 px-2 py-0.5 text-[10px] font-semibold text-zinc-600">制作所</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">営業時間やメニュー、写真を変えたいときは、制作所にご連絡ください。こちらで修正して反映します。公開後1か月以内の文言修正や画像の差し替えは無料です。それ以外は内容に応じてお見積もりします。</p>
+              </li>
+              <li class="flow-item is-client">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-lg font-semibold">ドメインの自動更新</h3>
+                  <span class="rounded bg-brand/10 px-2 py-0.5 text-[10px] font-semibold text-brand">お客様</span>
+                </div>
+                <p class="mt-2 text-sm leading-7 text-zinc-600">年に1回、登録したクレジットカードから自動で支払われます。カードを新しくしたときは、登録の変更をお忘れなく。期限が切れたカードのままだと、ホームページが見られなくなります。</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- 期間の目安 -->
+        <section class="py-20 lg:py-28">
+          <div class="mx-auto max-w-4xl px-5 lg:px-8">
+            <div data-reveal>
+              <div class="mb-5 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand"><span class="h-px w-8 bg-brand"></span><span>SCHEDULE</span></div>
+              <h2 class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">期間の目安</h2>
+            </div>
+            <div data-reveal class="mt-10 overflow-x-auto rounded-2xl border border-zinc-200">
+              <table class="w-full text-left text-sm">
+                <thead class="bg-zinc-50 text-xs text-zinc-500">
+                  <tr><th class="px-6 py-3 font-medium">段階</th><th class="px-6 py-3 font-medium">期間の目安</th><th class="px-6 py-3 font-medium">主に進める人</th></tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200">
+                  <tr><td class="px-6 py-4 text-zinc-700">準備（相談・見積もり・素材）</td><td class="px-6 py-4 font-mono whitespace-nowrap">1〜2週間</td><td class="px-6 py-4 text-zinc-600">お客様・制作所</td></tr>
+                  <tr><td class="px-6 py-4 text-zinc-700">制作（デザイン・確認・修正）</td><td class="px-6 py-4 font-mono whitespace-nowrap">1〜3週間</td><td class="px-6 py-4 text-zinc-600">制作所</td></tr>
+                  <tr><td class="px-6 py-4 text-zinc-700">公開</td><td class="px-6 py-4 font-mono whitespace-nowrap">1〜3日</td><td class="px-6 py-4 text-zinc-600">お客様・制作所</td></tr>
+                </tbody>
+                <tfoot class="border-t border-zinc-300 bg-zinc-50">
+                  <tr><td class="px-6 py-4 font-semibold">合計</td><td class="px-6 py-4 font-mono font-semibold whitespace-nowrap text-brand">約2〜8週間</td><td></td></tr>
+                </tfoot>
+              </table>
+            </div>
+            <p class="mt-5 text-xs leading-6 text-zinc-500">ページ数や素材の揃い具合によって前後します。公開したい日が決まっている場合は、打ち合わせのときにお知らせください。</p>
+          </div>
+        </section>
+
+        <!-- お問い合わせ -->
+        <section id="contact" class="px-3 pb-3 sm:px-5 sm:pb-5">
+          <div class="relative overflow-hidden rounded-3xl border border-brand/20 bg-brand/10 px-5 py-20 text-center text-zinc-950 sm:px-8 lg:py-24">
+            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,#439CE4_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.16]"></div>
+            <div class="relative mx-auto max-w-3xl">
+              <div class="mx-auto mb-7 flex w-fit items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand">
+                <span class="h-px w-8 bg-brand"></span><span>CONTACT</span>
+              </div>
+              <h2 class="text-3xl leading-tight font-semibold tracking-[-0.045em] sm:text-4xl">まずはお気軽にご相談ください。</h2>
+              <p class="mx-auto mt-6 max-w-2xl text-sm leading-8 text-zinc-700 sm:text-base">まだ内容が決まっていなくても大丈夫です。目的やご予算に合わせた進め方をご提案します。</p>
+              <div class="mt-10 flex flex-wrap justify-center gap-3">
+                <a href="/#contact" class="cta-shine group flex w-fit items-center gap-4 rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-brand/20 transition hover:bg-brand/85">
+                  相談・見積もりを依頼する
+                  <svg aria-hidden="true" class="size-5 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
+                </a>
+                <a href="/" class="flex items-center gap-3 rounded-full border border-zinc-300 bg-white px-7 py-4 text-sm font-semibold transition hover:border-zinc-500">トップへ戻る</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="px-5 py-10 lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <a href="/" class="flex items-center gap-3">
+            <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <img src="/shimizu-logo.jpeg" alt="" class="h-full w-auto max-w-none" />
+            </span>
+            <span class="text-sm font-semibold">しみずWeb制作所</span>
+          </a>
+          <p class="text-[10px] tracking-wider text-zinc-400">© 2025 しみずWEB制作所. ALL RIGHTS RESERVED.</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (() => {
+        const elements = Array.from(document.querySelectorAll("[data-reveal]"));
+        document.documentElement.classList.add("motion-ready");
+
+        if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          elements.forEach((element) => element.classList.add("is-visible"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -48px" },
+        );
+
+        elements.forEach((element) => observer.observe(element));
+      })();
+    </script>
+  </body>
+</html>

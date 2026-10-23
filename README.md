@@ -1,6 +1,6 @@
 # smz-homepage
 
-しみずWeb制作所のホームページです。HTMLファイル1枚だけで動く静的サイトで、Cloudflare Pages で公開しています。
+しみずWeb制作所のホームページです。HTMLファイルだけで動く静的サイトで、Cloudflare Pages で公開しています。
 
 - ビルド不要（Tailwind CSS は CDN から読み込み）
 - `main` ブランチに push すると本番に自動で反映
@@ -9,14 +9,20 @@
 
 ```
 .
-├── index.html                          # サイト本体（これ1枚）
-├── shimizu-logo.jpeg                   # ロゴ・ファビコン（要追加）
-├── aircon-house-cleaning-work.png      # 制作実績のサムネイル（要追加）
-├── payroll-invoice-system-work.png     # 制作実績のサムネイル（要追加）
+├── index.html                          # トップページ（/）
+├── flow/
+│   └── index.html                      # Web制作の流れ（/flow）
+├── shimizu-logo.jpeg                   # ロゴ・ファビコン
+├── aircon-house-cleaning-work.png      # 制作実績のサムネイル
+├── payroll-invoice-system-work.png     # 制作実績のサムネイル
 └── README.md
 ```
 
-画像は `index.html` と同じ階層（リポジトリ直下）に置きます。
+画像はリポジトリ直下に置き、HTML からは `/shimizu-logo.jpeg` のように `/` 始まりで参照します。
+
+### ページを増やすとき
+
+`フォルダ名/index.html` を作ると、`https://ドメイン/フォルダ名` で公開されます。`<head>`・ヘッダー・フッター・末尾の `<script>` は既存ページからコピーしてください（ビルドがないので、共通部分は各ページに書きます）。ヘッダーのメニューやフッターを変えるときは、**全ページを同じように直す**必要があります。
 
 ## ローカルで確認する
 
@@ -26,9 +32,9 @@
 open index.html
 ```
 
-ブラウザで直接開きます。ただし画像のパスが `/shimizu-logo.jpeg` のように `/` 始まりのため、この方法では**画像が表示されません**。
+ブラウザで直接開きます。ただし画像やリンクのパスが `/` 始まりのため、この方法では**画像が表示されず、`/flow` などへのリンクも動きません**。
 
-### 画像まで確認したいとき
+### 画像やページ間のリンクまで確認したいとき
 
 ```bash
 python3 -m http.server 8000
@@ -52,6 +58,7 @@ python3 -m http.server 8000
 | よくある質問 | `よくある質問` |
 | プロフィール | `id="about"` |
 | お問い合わせ先 | `mailto:` |
+| 制作の流れ・修正ルール・期間 | `flow/index.html` を開く |
 
 ### 色・フォントを変える
 
@@ -104,6 +111,6 @@ git push
 
 ## TODO
 
-- [ ] 画像3点（ロゴ・制作実績2点）を追加
+- [x] 画像3点（ロゴ・制作実績2点）を追加
 - [ ] お問い合わせ先 `contact@example.com` を実際のアドレスに変更
 - [ ] プロフィール写真の差し替え（現在はアイコンのみ）

@@ -14,6 +14,7 @@
 │   └── index.html                      # Web制作の流れ（/flow）
 ├── system/
 │   └── index.html                      # 業務効率化・システム開発（/system）
+├── grid-particles.js                   # 方眼の罫線を光の粒が走るアニメーション（全ページ共通）
 ├── shimizu-logo.jpeg                   # ロゴ・ファビコン
 ├── aircon-house-cleaning-work.png      # 制作実績のサムネイル
 ├── payroll-invoice-system-work.png     # 制作実績のサムネイル

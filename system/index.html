@@ -124,6 +124,45 @@
         animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
       }
 
+      /* 見出しの左の線を、光の粒が見出しに向かって流れる */
+      span.h-px.w-8.bg-brand {
+        position: relative;
+      }
+      span.h-px.w-8.bg-brand::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 5px;
+        height: 5px;
+        margin-top: -2.5px;
+        border-radius: 9999px;
+        background: var(--color-brand);
+        box-shadow:
+          0 0 6px 2px rgb(67 156 228 / 0.55),
+          -8px 0 6px -2px rgb(67 156 228 / 0.35);
+        opacity: 0;
+        animation: line-pulse 3.2s ease-in-out infinite;
+      }
+      @keyframes line-pulse {
+        0% {
+          transform: translateX(-4px);
+          opacity: 0;
+        }
+        8% {
+          opacity: 1;
+        }
+        45% {
+          transform: translateX(30px);
+          opacity: 1;
+        }
+        55%,
+        100% {
+          transform: translateX(30px);
+          opacity: 0;
+        }
+      }
+
       /* ボタンの光沢 */
       .cta-shine {
         position: relative;
@@ -163,6 +202,9 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
+        span.h-px.w-8.bg-brand::after {
+          display: none;
+        }
         .hero-reveal,
         .float-main,
         .float-card,
@@ -240,6 +282,7 @@
         <!-- ページ見出し -->
         <section class="relative overflow-hidden border-b border-zinc-200">
           <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] bg-[size:64px_64px] opacity-35"></div>
+          <canvas data-grid-particles data-cell="64" data-center-x="82%" data-center-y="55%" data-count="10" data-radius="0.35" class="grid-particles pointer-events-none absolute inset-0 size-full" aria-hidden="true"></canvas>
           <div class="relative mx-auto max-w-4xl px-5 py-14 lg:px-8 lg:py-20">
             <nav class="hero-reveal hero-reveal-1 mb-8 flex items-center gap-2 text-xs text-zinc-500" aria-label="パンくずリスト">
               <a href="/" class="transition hover:text-brand">トップ</a>
@@ -696,5 +739,6 @@
         elements.forEach((element) => observer.observe(element));
       })();
     </script>
+    <script src="/grid-particles.js"></script>
   </body>
 </html>

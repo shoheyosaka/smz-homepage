@@ -139,6 +139,197 @@
         animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
       }
 
+      /* 見出しの左の線を、光の粒が見出しに向かって流れる */
+      span.h-px.w-8.bg-brand {
+        position: relative;
+      }
+      span.h-px.w-8.bg-brand::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 5px;
+        height: 5px;
+        margin-top: -2.5px;
+        border-radius: 9999px;
+        background: var(--color-brand);
+        box-shadow:
+          0 0 6px 2px rgb(67 156 228 / 0.55),
+          -8px 0 6px -2px rgb(67 156 228 / 0.35);
+        opacity: 0;
+        animation: line-pulse 3.2s ease-in-out infinite;
+      }
+      @keyframes line-pulse {
+        0% {
+          transform: translateX(-4px);
+          opacity: 0;
+        }
+        8% {
+          opacity: 1;
+        }
+        45% {
+          transform: translateX(30px);
+          opacity: 1;
+        }
+        55%,
+        100% {
+          transform: translateX(30px);
+          opacity: 0;
+        }
+      }
+
+      /* ご依頼の流れ：番号と番号の間の線を、光の粒が 1→5 の順にリレーして流れる。
+         通ったところは線が青くなり、少しして元の色に戻る */
+      .process-step::after,
+      .process-fill {
+        animation-duration: 6s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+      .process-step:nth-child(2)::after,
+      .process-step:nth-child(2) .process-fill {
+        animation-delay: 0.9s;
+      }
+      .process-step:nth-child(3)::after,
+      .process-step:nth-child(3) .process-fill {
+        animation-delay: 1.8s;
+      }
+      .process-step:nth-child(4)::after,
+      .process-step:nth-child(4) .process-fill {
+        animation-delay: 2.7s;
+      }
+      .process-step:nth-child(5)::after,
+      .process-step:nth-child(5) .process-fill {
+        animation-delay: 3.6s;
+      }
+      /* 光の粒 */
+      .process-step::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 1.75rem;
+        left: 10px;
+        width: 5px;
+        height: 5px;
+        border-radius: 9999px;
+        background: var(--color-brand);
+        box-shadow: 0 0 6px 2px rgb(67 156 228 / 0.55);
+        opacity: 0;
+        animation-name: process-dot-down;
+      }
+      /* 青く塗る線（スマホは縦線、PCは上の横線に重ねる） */
+      .process-fill {
+        position: absolute;
+        top: 1.75rem;
+        bottom: 0.25rem;
+        left: 0.75rem;
+        width: 1px;
+        background: var(--color-brand);
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+        animation-name: process-fill-down;
+      }
+      .process-step:last-child::after,
+      .process-step:last-child .process-fill {
+        display: none;
+      }
+      @keyframes process-dot-down {
+        0% {
+          top: 1.75rem;
+          opacity: 0;
+        }
+        2% {
+          opacity: 1;
+        }
+        14% {
+          opacity: 1;
+        }
+        15%,
+        100% {
+          top: calc(100% - 0.25rem);
+          opacity: 0;
+        }
+      }
+      @keyframes process-fill-down {
+        0% {
+          transform: scaleY(0);
+          opacity: 1;
+        }
+        15% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        28% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        38%,
+        100% {
+          transform: scaleY(1);
+          opacity: 0;
+        }
+      }
+      @media (min-width: 1024px) {
+        .process-step::after {
+          top: -3px; /* 上の線（border）は内側の基準より 1px 上にある */
+          left: 1rem;
+          animation-name: process-dot-right;
+        }
+        .process-fill {
+          top: -1px;
+          bottom: auto;
+          left: 1rem;
+          right: 0;
+          width: auto;
+          height: 1px;
+          transform: scaleX(0);
+          transform-origin: left;
+          animation-name: process-fill-right;
+        }
+        /* PCでは ⑤ の右の線にも流す */
+        .process-step:last-child::after,
+        .process-step:last-child .process-fill {
+          display: block;
+        }
+      }
+      @keyframes process-dot-right {
+        0% {
+          left: 1rem;
+          opacity: 0;
+        }
+        2% {
+          opacity: 1;
+        }
+        14% {
+          opacity: 1;
+        }
+        15%,
+        100% {
+          left: 100%;
+          opacity: 0;
+        }
+      }
+      @keyframes process-fill-right {
+        0% {
+          transform: scaleX(0);
+          opacity: 1;
+        }
+        15% {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+        28% {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+        38%,
+        100% {
+          transform: scaleX(1);
+          opacity: 0;
+        }
+      }
+
       /* ボタンの光沢 */
       .cta-shine {
         position: relative;
@@ -178,6 +369,13 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
+        .process-step::after,
+        .process-fill {
+          display: none !important;
+        }
+        span.h-px.w-8.bg-brand::after {
+          display: none;
+        }
         .hero-reveal,
         .float-main,
         .float-system,
@@ -188,7 +386,7 @@
         html {
           scroll-behavior: auto;
         }
-        .hero-particles {
+        .grid-particles {
           display: none;
         }
       }
@@ -235,8 +433,8 @@
           <div
             class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] bg-[size:64px_64px] opacity-35"
           ></div>
-          <!-- 方眼の罫線の上を光の粒が走るアニメーション（描画はページ末尾のスクリプト） -->
-          <canvas data-grid-particles class="hero-particles pointer-events-none absolute inset-0 size-full" aria-hidden="true"></canvas>
+          <!-- 方眼の罫線の上を光の粒が走るアニメーション（描画は /grid-particles.js） -->
+          <canvas data-grid-particles data-cell="64" data-center="[data-hero-visual]" data-count="16" class="grid-particles pointer-events-none absolute inset-0 size-full" aria-hidden="true"></canvas>
           <!-- スマホでは「見出し → イラスト → ボタン」の順、PCでは左に見出しとボタン・右にイラスト -->
           <div
             class="relative mx-auto grid max-w-7xl items-center gap-y-10 px-5 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-14 lg:gap-y-0 lg:px-8 lg:py-14"
@@ -791,7 +989,8 @@
               <p class="mt-5 text-base leading-8 text-zinc-600">お問い合わせから納品まで、丁寧にコミュニケーションを取りながら進めます。</p>
             </div>
             <ol data-reveal="true" class="mt-10 grid lg:mt-16 lg:grid-cols-5 lg:gap-8">
-              <li class="relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+              <li class="process-step relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+                <span class="process-fill" aria-hidden="true"></span>
                 <span class="absolute top-0 left-0 grid size-6 place-items-center rounded-full bg-brand text-[10px] font-bold text-white lg:-top-2 lg:size-4 lg:text-[8px]">
                   1
                 </span>
@@ -799,7 +998,8 @@
                 <h3 class="pt-0.5 text-sm font-semibold lg:mt-4 lg:min-h-12 lg:pt-0">お問い合わせ</h3>
                 <p class="mt-1 text-xs leading-6 text-zinc-600 lg:mt-3">お困りごとを、お気軽にご相談ください。</p>
               </li>
-              <li class="relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+              <li class="process-step relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+                <span class="process-fill" aria-hidden="true"></span>
                 <span class="absolute top-0 left-0 grid size-6 place-items-center rounded-full bg-brand text-[10px] font-bold text-white lg:-top-2 lg:size-4 lg:text-[8px]">
                   2
                 </span>
@@ -807,7 +1007,8 @@
                 <h3 class="pt-0.5 text-sm font-semibold lg:mt-4 lg:min-h-12 lg:pt-0">ヒアリング・お見積もり</h3>
                 <p class="mt-1 text-xs leading-6 text-zinc-600 lg:mt-3">目的やご予算、必要な機能を確認します。</p>
               </li>
-              <li class="relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+              <li class="process-step relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+                <span class="process-fill" aria-hidden="true"></span>
                 <span class="absolute top-0 left-0 grid size-6 place-items-center rounded-full bg-brand text-[10px] font-bold text-white lg:-top-2 lg:size-4 lg:text-[8px]">
                   3
                 </span>
@@ -815,7 +1016,8 @@
                 <h3 class="pt-0.5 text-sm font-semibold lg:mt-4 lg:min-h-12 lg:pt-0">制作・開発</h3>
                 <p class="mt-1 text-xs leading-6 text-zinc-600 lg:mt-3">内容に合意いただいた後、制作を開始します。</p>
               </li>
-              <li class="relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+              <li class="process-step relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+                <span class="process-fill" aria-hidden="true"></span>
                 <span class="absolute top-0 left-0 grid size-6 place-items-center rounded-full bg-brand text-[10px] font-bold text-white lg:-top-2 lg:size-4 lg:text-[8px]">
                   4
                 </span>
@@ -823,7 +1025,8 @@
                 <h3 class="pt-0.5 text-sm font-semibold lg:mt-4 lg:min-h-12 lg:pt-0">ご確認・修正</h3>
                 <p class="mt-1 text-xs leading-6 text-zinc-600 lg:mt-3">制作物をご確認いただき、修正します。</p>
               </li>
-              <li class="relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+              <li class="process-step relative pb-6 pl-10 before:absolute before:top-7 before:bottom-1 before:left-3 before:w-px before:bg-zinc-300 last:pb-0 last:before:hidden lg:border-t lg:border-zinc-300 lg:pt-7 lg:pb-0 lg:pl-0 lg:before:hidden">
+                <span class="process-fill" aria-hidden="true"></span>
                 <span class="absolute top-0 left-0 grid size-6 place-items-center rounded-full bg-brand text-[10px] font-bold text-white lg:-top-2 lg:size-4 lg:text-[8px]">
                   5
                 </span>
@@ -1007,8 +1210,9 @@
                 <div
                   class="absolute inset-0 bg-[linear-gradient(to_right,#d4d4d8_1px,transparent_1px),linear-gradient(to_bottom,#d4d4d8_1px,transparent_1px)] bg-[size:40px_40px] opacity-50"
                 ></div>
+                <canvas data-grid-particles data-cell="40" data-center="[data-profile-visual]" data-count="10" data-radius="2" class="grid-particles pointer-events-none absolute inset-0 size-full" aria-hidden="true"></canvas>
                 <div class="absolute inset-0 grid place-items-center">
-                  <div class="grid size-40 place-items-center rounded-full border border-zinc-300 bg-white shadow-xl">
+                  <div data-profile-visual class="grid size-40 place-items-center rounded-full border border-zinc-300 bg-white shadow-xl">
                     <svg
                       aria-hidden="true"
                       class="size-16 text-zinc-400"
@@ -1162,202 +1366,7 @@
         elements.forEach((element) => observer.observe(element));
       })();
 
-      // ヒーローのイラストを中心に、方眼の罫線に沿って光の粒（データの流れ）が外へ伸びていく
-      (() => {
-        const canvas = document.querySelector("[data-grid-particles]");
-        const visual = document.querySelector("[data-hero-visual]");
-        if (!canvas || !visual || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        const ctx = canvas.getContext("2d");
-        const CELL = 64; // 背景の方眼と同じ間隔
-        const BRAND = "67, 156, 228";
-        const TRAIL = 90; // 光の尾の長さ（px）
-        const COUNT = 16;
-        const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-
-        let width = 0;
-        let height = 0;
-        let center = { x: 0, y: 0, gx: 0, gy: 0 };
-        let radius = 400; // ここまで伸びたら消える
-        let packets = [];
-        let pulses = [];
-        let running = false;
-        let last = 0;
-
-        const rand = (min, max) => min + Math.random() * (max - min);
-        const line = (n) => n * CELL + 0.5; // 罫線は各マスの先頭1pxに引かれている
-        const distance = (x, y) => Math.hypot(x - center.x, y - center.y);
-        // 中心からの距離に応じた濃さ（中心付近は濃く、radius で 0）
-        const fade = (x, y) => {
-          const t = Math.min(distance(x, y) / radius, 1);
-          return 1 - t * t * (3 - 2 * t);
-        };
-
-        // 中心から遠ざかる向きだけを選ぶ（戻ってこない）
-        function outward(x, y, exclude) {
-          return DIRS.filter(([dx, dy]) => dx * (x - center.x) >= 0 && dy * (y - center.y) >= 0 && !(exclude && dx === -exclude[0] && dy === -exclude[1]));
-        }
-
-        function spawn(delay) {
-          const gx = center.gx + Math.round(rand(-1, 1));
-          const gy = center.gy + Math.round(rand(-1, 1));
-          const x = line(gx);
-          const y = line(gy);
-          const options = outward(x, y);
-          return {
-            gx,
-            gy,
-            x,
-            y,
-            dir: options[Math.floor(rand(0, options.length))],
-            speed: rand(30, 60),
-            wait: delay,
-            corners: [{ x, y }], // 尾の根元（出発点）
-          };
-        }
-
-        function measure() {
-          const c = canvas.getBoundingClientRect();
-          const v = visual.getBoundingClientRect();
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          width = c.width;
-          height = c.height;
-          canvas.width = Math.round(width * dpr);
-          canvas.height = Math.round(height * dpr);
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          const cx = v.left - c.left + v.width / 2;
-          const cy = v.top - c.top + v.height / 2;
-          center = { x: line(Math.round(cx / CELL)), y: line(Math.round(cy / CELL)), gx: Math.round(cx / CELL), gy: Math.round(cy / CELL) };
-          radius = Math.max(220, Math.min(v.width * 0.95, 520));
-          // 最初から粒が広がった状態で見えるよう、それぞれ少し先まで早送りしておく
-          packets = Array.from({ length: COUNT }, () => {
-            const p = spawn(0);
-            return step(p, rand(0, radius / p.speed)) ? p : spawn(rand(0, 1));
-          });
-          pulses = [];
-        }
-
-        function turn(p) {
-          // 曲がるのは4割ほど。外向きの道がなければそのまま進む
-          if (Math.random() < 0.6) return p.dir;
-          const options = outward(p.x, p.y, p.dir).filter(([dx, dy]) => !(dx === p.dir[0] && dy === p.dir[1]));
-          return options.length ? options[Math.floor(rand(0, options.length))] : p.dir;
-        }
-
-        function step(p, dt) {
-          if (p.wait > 0) {
-            p.wait -= dt;
-            return true;
-          }
-          let move = p.speed * dt;
-          while (move > 0) {
-            const tx = line(p.gx + p.dir[0]);
-            const ty = line(p.gy + p.dir[1]);
-            const dist = Math.abs(tx - p.x) + Math.abs(ty - p.y);
-            if (move < dist) {
-              p.x += p.dir[0] * move;
-              p.y += p.dir[1] * move;
-              break;
-            }
-            // 交差点に到着
-            move -= dist;
-            p.x = tx;
-            p.y = ty;
-            p.gx += p.dir[0];
-            p.gy += p.dir[1];
-            const next = turn(p);
-            if (next !== p.dir) p.corners.unshift({ x: p.x, y: p.y });
-            p.dir = next;
-            if (Math.random() < 0.1 && fade(p.x, p.y) > 0.3) pulses.push({ x: p.x, y: p.y, t: 0 });
-          }
-          return distance(p.x, p.y) < radius + TRAIL;
-        }
-
-        function drawPacket(p) {
-          if (p.wait > 0) return;
-          // 先頭から角を順にたどり、TRAIL の長さだけ尾を描く
-          const points = [{ x: p.x, y: p.y }, ...p.corners];
-          let traveled = 0;
-          for (let i = 0; i < points.length - 1 && traveled < TRAIL; i++) {
-            const a = points[i];
-            let b = points[i + 1];
-            const seg = Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
-            if (traveled + seg > TRAIL) {
-              const k = (TRAIL - traveled) / seg;
-              b = { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
-            }
-            const end = Math.min(traveled + seg, TRAIL);
-            const gradient = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-            gradient.addColorStop(0, `rgba(${BRAND}, ${0.85 * (1 - traveled / TRAIL) * fade(a.x, a.y)})`);
-            gradient.addColorStop(1, `rgba(${BRAND}, ${0.85 * (1 - end / TRAIL) * fade(b.x, b.y)})`);
-            ctx.strokeStyle = gradient;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-            traveled = end;
-            if (traveled >= TRAIL) p.corners.length = i + 1; // 尾より後ろの角は捨てる
-          }
-          // 先頭の光
-          const f = fade(p.x, p.y);
-          ctx.fillStyle = `rgba(${BRAND}, ${0.3 * f})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.fillStyle = `rgba(${BRAND}, ${f})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        function drawPulse(pulse) {
-          ctx.strokeStyle = `rgba(${BRAND}, ${0.5 * (1 - pulse.t) * fade(pulse.x, pulse.y)})`;
-          ctx.beginPath();
-          ctx.arc(pulse.x, pulse.y, 2 + pulse.t * 14, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-
-        function frame(now) {
-          if (!running) return;
-          const dt = Math.min((now - last) / 1000, 0.05);
-          last = now;
-          ctx.clearRect(0, 0, width, height);
-          ctx.lineWidth = 1.5;
-          ctx.lineCap = "round";
-
-          packets = packets.map((p) => (step(p, dt) ? p : spawn(rand(0, 1.5))));
-          packets.forEach(drawPacket);
-
-          pulses = pulses.filter((pulse) => (pulse.t += dt / 1.2) < 1);
-          pulses.forEach(drawPulse);
-
-          requestAnimationFrame(frame);
-        }
-
-        function start() {
-          if (running) return;
-          running = true;
-          last = performance.now();
-          requestAnimationFrame(frame);
-        }
-
-        function stop() {
-          running = false;
-        }
-
-        measure();
-        new ResizeObserver(measure).observe(canvas);
-        // イラストの登場アニメーションが終わってから位置を測り直す
-        window.addEventListener("load", () => setTimeout(measure, 1200));
-
-        // 画面外やタブが裏にあるときは止める
-        let visible = true;
-        new IntersectionObserver(([entry]) => {
-          visible = entry.isIntersecting;
-          visible && !document.hidden ? start() : stop();
-        }).observe(canvas);
-        document.addEventListener("visibilitychange", () => (visible && !document.hidden ? start() : stop()));
-      })();
     </script>
+    <script src="/grid-particles.js"></script>
   </body>
 </html>
